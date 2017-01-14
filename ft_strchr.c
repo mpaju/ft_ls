@@ -14,9 +14,6 @@
 
 char	*ft_strchr(char *str, int c)
 {
-	char	ch;
-
-	ch = (char)c;
 	if (!*str)
 		return (0);
 	while (*str && *str != c)

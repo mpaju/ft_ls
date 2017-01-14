@@ -1,25 +1,26 @@
 #include "libft.h"
+#include <stdlib.h>
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {
-	t_list	*link;
-	if (!(link = (t_list *)malloc(sizeof(*link))))
+	t_list	*list;
+
+	list = (t_list *)malloc(sizeof(*list));
+	if (!list)
 		return (NULL);
 	if (content)
 	{
-		if (link->content = malloc(content_size))
-		{
-			ft_memcpy(link->content, content, content_size);
-			link->content_size = content_size;
-		}
+		if ((list->content = malloc(content_size)))
+			ft_memcpy(list->content, content, content_size);
 		else
 			return (NULL);
+		list->content_size = content_size;
 	}
 	else
 	{
-		link->content = NULL;
-		link->content_size = 0;
+		list->content = NULL;
+		list->content_size = 0;
 	}
-	link->next = NULL;
-	return (link);
+	list->next = NULL;
+	return (list);
 }

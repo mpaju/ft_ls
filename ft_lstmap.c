@@ -6,11 +6,11 @@ t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 	t_list	*tmp_list;
 
 	if (!lst || !f)
-		return ;
+		return (NULL);
 	if (!(tmp = f(lst)))
 		return (NULL);
 	tmp_list = tmp;
-	while (true)
+	while (1)
 	{
 		if (!(tmp->next = f(lst->next)))
 			return (NULL);
