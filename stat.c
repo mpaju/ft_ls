@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-char const * sperm(__mode_t mode) {
+char const * sperm(mode_t mode) {
     static char local_buff[16] = {0};
     int i = 0;
     // user permissions
@@ -55,14 +55,17 @@ char            datestring[256];
 DIR             *dir;
 /* Loop through directory entries. */
 int     main(void){
-    dir = opendir(".");
+    dir = opendir("/dev/");
     while ((dp = readdir(dir)) != NULL) {
 
 
         /* Get entry's information. */
         if (stat(dp->d_name, &statbuf) == -1)
-            continue;
-
+        {
+		printf("luls\n");
+		perror ("oops");
+			continue;
+		}
 
         /* Print out type, permissions, and number of links. */
         printf("%10.10s", sperm(statbuf.st_mode));
