@@ -1,4 +1,5 @@
 #include "ft_ls.h"
+#include "libft.h"
 #include <stdio.h>
 
 const char	*find_args(int ac, const char **av)
