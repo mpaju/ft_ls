@@ -9,11 +9,19 @@ const char	*find_args(int ac, const char **av)
 
 int	init_structures(struct s_file *sfile)
 {
-	if (!(sfile = (struct s_file *)ft_memalloc(sizeof(struct s_file))))
+	//if (!(sfile = ft_lstnew(sfile, sizeof(t_file))))
+	//	return (0);
+	
+	if (!(sfile = (t_file *)malloc(sizeof(t_file))))
 			return (0);
 	
-	if (!(sfile->statbuf = (struct stat *)ft_memalloc(sizeof(struct stat))))
+	if (!(sfile->filepath = (char *)malloc(sizeof(char) * 256)))
 		return (0);
+	if (!(sfile->time = (char *)malloc(sizeof(char) * 256)))
+		return (0);
+	if (!(sfile->name = (char *)ft_memalloc(sizeof(char) * 256)))
+		return (0);
+	ft_bzero(sfile->name, 256);
 	return (1);
 }
 
@@ -22,18 +30,29 @@ int main(int ac, const char **av)
 	DIR	*homedir;
 	struct dirent	*readhdir;
 	struct s_file			*filedata;
+	char	*tmp;
 
-	if (!(init_structures(filedata)))
+	if (!(filedata = (t_file *)ft_memalloc(sizeof(t_file))))
+		return (0);
+	if (!(filedata->filepath = (char *)malloc(sizeof(char) * 256)))
+		return (0);
+	if (!(filedata->time = (char *)malloc(sizeof(char) * 256)))
+		return (0);
+	if (!(filedata->name = (char *)ft_memalloc(sizeof(char) * 256)))
 		return (0);
 	if (!(homedir = opendir(find_args(ac, av))))
 		return 0;
-	
+	//filedata.name = (char *)ft_memalloc(sizeof(char) * 256);
 	while ((readhdir = readdir(homedir)))
 	{
-		ft_strcpy(filedata->name, readhdir->d_name);
+	//	tmp = (char *)ft_memalloc(sizeof(char) * 256);
+		filedata->name = ft_strcpy(filedata->name, readhdir->d_name);
+		printf("jou\n");
+		fflush(stdout);
 		printf("%s -----> ", filedata->name);
-		stat(readhdir->d_name, (filedata->statbuf));
-		printf("buf->%o\n", filedata->statbuf->st_mode);
+		fflush (stdout);
+	//	stat(readhdir->d_name, (filedata->statbuf));
+	//	printf("buf->%o\n", filedata->statbuf->st_mode);
 
 	}
 	return (0);
