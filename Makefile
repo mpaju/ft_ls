@@ -1,7 +1,8 @@
 CC = gcc
 
 
-SRC_FILES = main.c
+SRC_FILES = main.c \
+			get_args.c
 SRC_FOLDER = sources/
 SRCS = $(SRC_FILES)
 

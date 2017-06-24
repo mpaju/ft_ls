@@ -55,7 +55,7 @@ char            datestring[256];
 DIR             *dir;
 /* Loop through directory entries. */
 int     main(void){
-    dir = opendir(".");
+    dir = opendir("/dev/");
     while ((dp = readdir(dir)) != NULL) {
 
 

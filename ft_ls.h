@@ -1,12 +1,23 @@
 #ifndef FT_LS_H
 # define FT_LS_H
 
+# include <stdio.h>
+
 # include <sys/stat.h>
 # include <dirent.h>
 # include <time.h>
-
+# include "libft/libft.h"
 # define FLAG(x) (x == 'l' || x == 'a' || x == 'r' || x == 'R' || x == 't')
-#
+
+typedef struct		s_flag {
+	char			flag_l;
+	char			flag_a;
+	char			flag_r;
+	char			flag_R;
+	char			flag_t;
+}					t_flag;
+
+
 typedef struct		s_file {
 	char			*filepath;
 	char			*name;
@@ -14,5 +25,5 @@ typedef struct		s_file {
 	struct s_file	*next;
 }					t_file;
 
-const char	*find_args(int ac, const char **av);
+int		get_args(int ac, const char **av, t_flag *flags, t_list *paths);
 #endif
