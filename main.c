@@ -29,8 +29,6 @@ int main(int ac, const char **av)
 	t_flag			flags;
 	t_list			paths;
 
-	ft_bzero(&flags, sizeof(t_flag));
-	ft_bzero(&paths, sizeof(t_list));
 	get_args(ac, av, &flags, &paths);
 	if (!(filedata = (t_file *)ft_memalloc(sizeof(t_file))))
 		return (0);

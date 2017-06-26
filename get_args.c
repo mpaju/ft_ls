@@ -30,13 +30,6 @@ void		flag_process(const char *av, t_flag *flags)
 	}
 }
 
-void	path_process(const char *av, t_list *paths)
-{
-	ft_strcpy(paths->content, (char *)av);
-	paths->content_size = sizeof((char *)paths->content);
-	return ;
-}
-
 int		get_args(int ac, const char **av, t_flag *flags, t_list *paths)
 {
 	int		i;
@@ -51,9 +44,12 @@ int		get_args(int ac, const char **av, t_flag *flags, t_list *paths)
 		if (*av == '\0')
 			break;
 	}
-	while (i < ac)
+	paths = ft_lstnew(av, sizeof(av));
+	while (i + 1 < ac)
 	{
-		path_process(*av, paths);
+		av++;
+		i++;
+		paths->next = ft_lstnew(av, sizeof(av));
 	}
 	return (0);
 }
