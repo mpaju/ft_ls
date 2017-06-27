@@ -24,6 +24,6 @@ typedef struct		s_file {
 	time_t			*time;
 	struct s_file	*next;
 }					t_file;
-
+void	ls(t_list *paths, t_flag *flags);
 int		get_args(int ac, const char **av, t_flag *flags, t_list *paths);
 #endif

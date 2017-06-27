@@ -30,18 +30,11 @@ int main(int ac, const char **av)
 	t_list			paths;
 
 	get_args(ac, av, &flags, &paths);
-	if (!(filedata = (t_file *)ft_memalloc(sizeof(t_file))))
-		return (0);
-	if (!(filedata->filepath = (char *)malloc(sizeof(char) * 256)))
-		return (0);
-	if (!(filedata->time = (time_t *)malloc(sizeof(char) * 256)))
-		return (0);
-	if (!(filedata->name = (char *)ft_memalloc(sizeof(char) * 256)))
-		return (0);
+	ls(&paths, &flags);
 	if (!(homedir = opendir(".")))
 		return 0;
 	//filedata.name = (char *)ft_memalloc(sizeof(char) * 256);
-	/*while ((readhdir = readdir(homedir)))
+	/*hile ((readhdir = readdir(homedir)))
 	{
 	//	tmp = (char *)ft_memalloc(sizeof(char) * 256);
 		filedata->name = ft_strcpy(filedata->name, readhdir->d_name);
