@@ -21,6 +21,10 @@ all:
 	@make -C $(LIB_FOLDER)
 	@$(CC) $(SRCS) -o $(NAME) $(LIB_FLAGS)
 
+deb:
+	@make -C $(LIB_FOLDER)
+	@$(CC) -c $(SRCS) -o $(NAME) $(LIB_FLAGS)
+
 clean:
 	@make clean -C $(LIB_FOLDER)
 fclean:
