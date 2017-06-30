@@ -1,6 +1,6 @@
 #include "ft_ls.h"
 #include "libft/libft.h"
-void	ls(t_list *paths, t_flag *flags)
+void	ft_ls(t_list *paths, t_flag *flags)
 {
 	DIR				*homedir;
 	struct dirent	*readhdir;
@@ -8,7 +8,7 @@ void	ls(t_list *paths, t_flag *flags)
 	char			*tmp;
 
 	if (!(homedir = opendir(".")))
-		return 0;
+		return ;
 
 
 }

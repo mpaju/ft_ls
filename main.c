@@ -30,7 +30,7 @@ int main(int ac, const char **av)
 	t_list			paths;
 
 	get_args(ac, av, &flags, &paths);
-	ls(&paths, &flags);
+	ft_ls(&paths, &flags);
 	if (!(homedir = opendir(".")))
 		return 0;
 	//filedata.name = (char *)ft_memalloc(sizeof(char) * 256);

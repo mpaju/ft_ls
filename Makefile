@@ -2,7 +2,8 @@ CC = gcc
 
 
 SRC_FILES = main.c \
-			get_args.c
+			get_args.c \
+			ft_ls.c
 SRC_FOLDER = sources/
 SRCS = $(SRC_FILES)
 
@@ -23,7 +24,7 @@ all:
 
 deb:
 	@make -C $(LIB_FOLDER)
-	@$(CC) -c $(SRCS) -o $(NAME) $(LIB_FLAGS)
+	@$(CC)  $(SRCS) -o $(NAME) -g $(LIB_FLAGS)
 
 clean:
 	@make clean -C $(LIB_FOLDER)
