@@ -8,7 +8,7 @@
 # include <time.h>
 # include "libft/libft.h"
 # define FLAG(x) (x == 'l' || x == 'a' || x == 'r' || x == 'R' || x == 't')
-
+# define PATHBUF 1024
 typedef struct		s_flag {
 	char			flag_l;
 	char			flag_a;
@@ -20,6 +20,7 @@ typedef struct		s_flag {
 typedef struct		s_dir {
 	char			*name;
 	time_t			time;
+	struct s_dir	*subdir;
 	struct s_dir	*next;
 }					t_dir;
 

@@ -49,13 +49,13 @@ int		get_args(int ac, const char **av, t_flag *flags, t_dir *paths)
 	if ((stat(*av, &dirstat)) == -1)
 		paths = tdirnew((char *)*av, -1);
 	else
-		paths = tdirnew((char *) *av, sizeof(av));
-	while (i + 1 < ac)
+		paths = tdirnew((char *) *av, dirstat.st_mtime);
+	/*while (i + 1 < ac)
 	{
 		av++;
 		i++;
 		paths->next = ft_lstnew(av, sizeof(av));
-	}
+	}*/
 	return (0);
 }
 

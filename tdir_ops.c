@@ -12,16 +12,17 @@ t_dir	*tdirnew(char *name, time_t time)
 			return (NULL);
 		ft_strcpy(ret->name, name);
 	}
+	else
+		ret->name = NULL;
 	if (time)
 	{
 		if (!(ret->time = (time_t)ft_memalloc(sizeof(time))))
 			return (NULL);
 		ft_memcpy((void *)ret->time, (void *)time, sizeof(time));
 	}
-	if (!name && !time)
-	{
-		ret->name = NULL;
+	else
 		ret->time = 0;
-	}
+	ret->subdir = NULL;
+	ret->next = NULL;
 	return (ret);
 }
