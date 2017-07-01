@@ -27,10 +27,10 @@ int main(int ac, const char **av)
 	struct stat		for_time;
 	char			*tmp;
 	t_flag			flags;
-	t_dir			paths;
+	t_dir			dirlist;
 
-	get_args(ac, av, &flags, &paths);
-	ft_ls(&paths, &flags);
+	get_args(ac, av, &flags, &dirlist);
+	ft_ls(&dirlist, &flags);
 	if (!(homedir = opendir(".")))
 		return 0;
 	//filedata.name = (char *)ft_memalloc(sizeof(char) * 256);

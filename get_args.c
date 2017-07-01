@@ -30,11 +30,23 @@ void		flag_process(const char *av, t_flag *flags)
 	}
 }
 
-int		get_args(int ac, const char **av, t_flag *flags, t_dir *paths)
+void	sort_dir(t_flag *flags, t_dir *dirlist, t_dir *newdir)
+{
+	if (dirlist == NULL)
+		dirlist = newdir;
+		// siin vaja debuggimist, ei tea kas aadressi teema korras
+	else if (flags->flag_t)
+		sort_by_time(dirlist, newdir);
+	else
+		sort_by_alpha(dirlist, newdir);
+}
+
+int		get_args(int ac, const char **av, t_flag *flags, t_dir *dirlist)
 {
 	int			i;
 	struct stat	dirstat;
 	time_t		time;
+	t_dir		*newdir;
 
 	i = 1;
 	av++;
@@ -46,10 +58,23 @@ int		get_args(int ac, const char **av, t_flag *flags, t_dir *paths)
 		if (*av == '\0')
 			break;
 	}
+	// flaggi teema peaks korras olema
 	if ((stat(*av, &dirstat)) == -1)
-		paths = tdirnew((char *)*av, -1);
+		perror(*av);
+		// ei tea kas tuleb oige error
 	else
-		paths = tdirnew((char *) *av, dirstat.st_mtime);
+		newdir = tdirnew((char *) *av, dirstat.st_mtime);
+	av++;
+	while (*av)
+	{
+		if ((stat(*av, &dirstat)) == -1)
+			//paths = tdirnew((char *)*av, -1);
+			perror(*av);
+		else
+			newdir = tdirnew((char *) *av, dirstat.st_mtime);
+		sort_dir(flags, dirlist, newdir);
+		av++;
+	}
 	/*while (i + 1 < ac)
 	{
 		av++;
