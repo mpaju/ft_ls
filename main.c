@@ -27,7 +27,7 @@ int main(int ac, const char **av)
 	struct stat		for_time;
 	char			*tmp;
 	t_flag			flags;
-	t_list			paths;
+	t_dir			paths;
 
 	get_args(ac, av, &flags, &paths);
 	ft_ls(&paths, &flags);

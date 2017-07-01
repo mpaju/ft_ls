@@ -30,10 +30,12 @@ void		flag_process(const char *av, t_flag *flags)
 	}
 }
 
-int		get_args(int ac, const char **av, t_flag *flags, t_list *paths)
+int		get_args(int ac, const char **av, t_flag *flags, t_dir *paths)
 {
-	int		i;
-	
+	int			i;
+	struct stat	dirstat;
+	time_t		time;
+
 	i = 1;
 	av++;
 	while (*av[0] == '-' && i < ac)
@@ -44,7 +46,10 @@ int		get_args(int ac, const char **av, t_flag *flags, t_list *paths)
 		if (*av == '\0')
 			break;
 	}
-	paths = ft_lstnew(av, sizeof(av));
+	if ((stat(*av, &dirstat)) == -1)
+		paths = tdirnew((char *)*av, -1);
+	else
+		paths = tdirnew((char *) *av, sizeof(av));
 	while (i + 1 < ac)
 	{
 		av++;

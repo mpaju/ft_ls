@@ -17,6 +17,11 @@ typedef struct		s_flag {
 	char			flag_t;
 }					t_flag;
 
+typedef struct		s_dir {
+	char			*name;
+	time_t			time;
+	struct s_dir	*next;
+}					t_dir;
 
 typedef struct		s_file {
 	char			*filepath;
@@ -24,6 +29,7 @@ typedef struct		s_file {
 	time_t			*time;
 	struct s_file	*next;
 }					t_file;
-void	ft_ls(t_list *paths, t_flag *flags);
-int		get_args(int ac, const char **av, t_flag *flags, t_list *paths);
+void	ft_ls(t_dir *paths, t_flag *flags);
+int		get_args(int ac, const char **av, t_flag *flags, t_dir *paths);
+t_dir	*tdirnew(char *name, time_t time);
 #endif
