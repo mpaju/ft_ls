@@ -29,18 +29,17 @@ void		flag_process(const char *av, t_flag *flags)
 		av++;
 	}
 }
+
+int	sort_by_alpha(t_dir *dirlist, t_dir *newdir)
+{
+	return (ft_strcmp(dirlist->name, newdir->name) > 0);
+}
+
 int	sort_by_time(t_dir *dirlist, t_dir *newdir)
 {
-
-	if 
-	while (*dirlist)
-	{
-		if (dirlist->time < newdir->time)
-		{
-			
-		}
-		dirlist = dirlist->next;
-	}
+	if (dirlist->time == newdir->time)
+		return (sort_by_alpha(dirlist, newdir));
+	return (dirlist->time > newdir->time);
 }
 
 void	lstlink(t_flag *flags, t_dir **dirlist, t_dir *newdir)
@@ -50,11 +49,11 @@ void	lstlink(t_flag *flags, t_dir **dirlist, t_dir *newdir)
 
 	curr = newdir;
 	prev = NULL;
-	while (**dirlist)
+	while (*dirlist)
 	{
 		if (flags->flag_t)
 		{
-			if ((sort_by_time(*dirlist, newdir)) => 0) //vajab debuggimist
+			if (((sort_by_time(*dirlist, newdir)) => 0)) //vajab debuggimist
 			{
 				if (prev == NULL)
 				{
@@ -63,14 +62,26 @@ void	lstlink(t_flag *flags, t_dir **dirlist, t_dir *newdir)
 				}
 				else
 				{
-					newdir->next = prev_dir->next;
-					prev_dir->next = newdir;
+					newdir->next = prev->next;
+					prev->next = newdir;
 				}
 			}
 		}
 		else
 		{
-			
+			if ((sort_by_alpha(*dirlist, newdir)) => 0)
+			{
+				if (prev == NULL)
+				{
+					newdir->next = *dirlist;
+					*dirlist = newdir;
+				}
+				else
+				{
+					newdir->next = prev->next;
+					prev->next = newdir;
+				}
+			}
 		}
 		prev = curr;
 		curr = curr->next;
