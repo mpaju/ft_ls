@@ -29,16 +29,70 @@ void		flag_process(const char *av, t_flag *flags)
 		av++;
 	}
 }
-
-void	sort_dir(t_flag *flags, t_dir *dirlist, t_dir *newdir)
+int	sort_by_time(t_dir *dirlist, t_dir *newdir)
 {
-	if (dirlist == NULL)
-		dirlist = newdir;
-		// siin vaja debuggimist, ei tea kas aadressi teema korras
+
+	if 
+	while (*dirlist)
+	{
+		if (dirlist->time < newdir->time)
+		{
+			
+		}
+		dirlist = dirlist->next;
+	}
+}
+
+void	lstlink(t_flag *flags, t_dir **dirlist, t_dir *newdir)
+{
+	t_dir	*prev;
+	t_dir	*curr;
+
+	curr = newdir;
+	prev = NULL;
+	while (**dirlist)
+	{
+		if (flags->flag_t)
+		{
+			if ((sort_by_time(*dirlist, newdir)) => 0) //vajab debuggimist
+			{
+				if (prev == NULL)
+				{
+					newdir->next = *dirlist;
+					*dirlist = newdir;
+				}
+				else
+				{
+					newdir->next = prev_dir->next;
+					prev_dir->next = newdir;
+				}
+			}
+		}
+		else
+		{
+			
+		}
+		prev = curr;
+		curr = curr->next;
+		*dirlist++;
+	}
+}
+
+void	sort_dir(t_flag *flags, t_dir **dirlist, t_dir *newdir)
+{
+	if (*dirlist == NULL)
+	{
+		dirlist = &newdir;
+		return ;
+	}
+	// siin vaja debuggimist, ei tea kas aadressi teema korras (kas dirlisti aadress jaabki listi algusesse, voi jamab
+	lstlink(flags, dirlist, newdir);
+	/*
 	else if (flags->flag_t)
 		sort_by_time(dirlist, newdir);
 	else
 		sort_by_alpha(dirlist, newdir);
+	*/
 }
 
 int		get_args(int ac, const char **av, t_flag *flags, t_dir *dirlist)
@@ -72,7 +126,7 @@ int		get_args(int ac, const char **av, t_flag *flags, t_dir *dirlist)
 			perror(*av);
 		else
 			newdir = tdirnew((char *) *av, dirstat.st_mtime);
-		sort_dir(flags, dirlist, newdir);
+		sort_dir(flags, &dirlist, newdir);
 		av++;
 	}
 	/*while (i + 1 < ac)
