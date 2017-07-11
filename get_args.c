@@ -49,11 +49,11 @@ void	lstlink(t_flag *flags, t_dir **dirlist, t_dir *newdir)
 
 	curr = newdir;
 	prev = NULL;
-	while (*dirlist)
+	while (curr)
 	{
 		if (flags->flag_t)
 		{
-			if (((sort_by_time(*dirlist, newdir)) => 0)) //vajab debuggimist
+			if (((sort_by_time(*dirlist, newdir) > 0))) //vajab debuggimist
 			{
 				if (prev == NULL)
 				{
@@ -69,7 +69,7 @@ void	lstlink(t_flag *flags, t_dir **dirlist, t_dir *newdir)
 		}
 		else
 		{
-			if ((sort_by_alpha(*dirlist, newdir)) => 0)
+			if (((sort_by_alpha(*dirlist, newdir)) > 0))
 			{
 				if (prev == NULL)
 				{
@@ -85,7 +85,6 @@ void	lstlink(t_flag *flags, t_dir **dirlist, t_dir *newdir)
 		}
 		prev = curr;
 		curr = curr->next;
-		*dirlist++;
 	}
 }
 
