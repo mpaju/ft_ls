@@ -129,6 +129,7 @@ int		get_args(int ac, const char **av, t_flag *flags, t_dir *dirlist)
 	else
 		newdir = tdirnew((char *) *av, dirstat.st_mtime);
 	av++;
+	dirlist = newdir;
 	while (*av)
 	{
 		if ((stat(*av, &dirstat)) == -1)

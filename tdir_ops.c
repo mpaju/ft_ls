@@ -3,6 +3,7 @@
 t_dir	*tdirnew(char *name, time_t time)
 {
 	t_dir	*ret;
+	time_t	*rettimecopy;
 
 	if (!(ret = (t_dir *)ft_memalloc(sizeof(*ret))))
 		return (NULL);
@@ -14,11 +15,13 @@ t_dir	*tdirnew(char *name, time_t time)
 	}
 	else
 		ret->name = NULL;
+	rettimecopy = &ret->time;
 	if (time)
 	{
 		if (!(ret->time = (time_t)ft_memalloc(sizeof(time))))
 			return (NULL);
-		ft_memcpy((void *)ret->time, (void *)time, sizeof(time_t));
+		*rettimecopy = time;
+		//ft_memcpy((void *)ret->time, (void *)time, sizeof(time_t));
 	}
 	else
 		ret->time = 0;
