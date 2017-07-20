@@ -54,21 +54,22 @@ struct tm      *tm;
 char            datestring[256];
 DIR             *dir;
 /* Loop through directory entries. */
-int     main(void){
-    dir = opendir(".");
+int     main(int ac, char **av){
+    (void)ac;
+    dir = opendir(av[1]);
     while ((dp = readdir(dir)) != NULL) {
 
 
         /* Get entry's information. */
         if (stat(dp->d_name, &statbuf) == -1)
         {
-		printf("luls\n");
-		perror ("oops");
-			continue;
-		}
+            printf("ai, d_nimi: %s\n", dp->d_name);
+            fflush (stdout);
+            continue;
+        }
 
         /* Print out type, permissions, and number of links. */
-        printf("%10.10s", sperm(statbuf.st_mode));
+        printf("%10.10s", sperm (statbuf.st_mode));
         printf("%4d", statbuf.st_nlink);
 
 
@@ -99,5 +100,4 @@ int     main(void){
 
         printf(" %s %s\n", datestring, dp->d_name);
     }
-    return 0;
 }

@@ -1,6 +1,7 @@
 #include "ft_ls.h"
 #include "libft/libft.h"
 
+/*
 void		flag_process(const char *av, t_flag *flags)
 {
 	int	av_strlen;
@@ -23,12 +24,14 @@ void		flag_process(const char *av, t_flag *flags)
 			flags->flag_t = 1;
 		else
 		{
+			wrong_flag(*av);
 			ft_putstr("Usage ./ft_ls -larRt path");
-			exit (0);
+			exit (1);
 		}
 		av++;
 	}
 }
+*/
 
 int	sort_by_alpha(t_dir *dirlist, t_dir *newdir)
 {

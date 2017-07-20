@@ -29,7 +29,9 @@ int main(int ac, const char **av)
 	t_flag			flags;
 	t_dir			dirlist;
 
-	get_args(ac, av, &flags, &dirlist);
+	check_empty_arg(ac, av);
+	process_args(ac, av, &flags, &dirlist);
+	// siin peaks nuud failinimed ka prinditud olema + errorid vale nime puhul
 	ft_ls(&dirlist, &flags);
 	if (!(homedir = opendir(".")))
 		return 0;
