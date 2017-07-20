@@ -27,7 +27,7 @@ else
 	insertdir(dirlist, newdir, &sort_alpha)
 
 if flag-r
-	lukka reversiç
+	lukka reversi
 
 */
 
@@ -42,6 +42,7 @@ sort_time(**dirlist, newdir)
 		{
 			if (prev == NULL)
 			{
+				pigem listaddback, front jne
 				// siia normilt debugi vaja
 				newdir->next = *dirlist;
 				dirlist = &newdir;

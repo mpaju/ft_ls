@@ -1,7 +1,7 @@
 #include "ft_ls.h"
 #include "libft/libft.h"
 
-/*
+
 void		flag_process(const char *av, t_flag *flags)
 {
 	int	av_strlen;
@@ -31,7 +31,7 @@ void		flag_process(const char *av, t_flag *flags)
 		av++;
 	}
 }
-*/
+
 
 int	sort_by_alpha(t_dir *dirlist, t_dir *newdir)
 {
