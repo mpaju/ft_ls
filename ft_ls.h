@@ -30,8 +30,10 @@ typedef struct		s_flag {
 
 typedef struct		s_dir {
 	char			*name;
+	char			*path;
 	time_t			time;
 	struct s_dir	*subdir;
+	struct s_dir	*filelist;
 	struct s_dir	*next;
 }					t_dir;
 

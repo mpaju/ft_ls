@@ -61,7 +61,7 @@ int     main(int ac, char **av){
 
 
         /* Get entry's information. */
-        if (stat(dp->d_name, &statbuf) == -1)
+        if (lstat(dp->d_name, &statbuf) == -1)
         {
             printf("ai, d_nimi: %s\n", dp->d_name);
             fflush (stdout);
