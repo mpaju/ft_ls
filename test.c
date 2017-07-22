@@ -11,9 +11,12 @@ int main(int argc, const char *argv[])
 	struct stat teststat;
 	char *time;
 
-	lstat("./athr", &teststat);
+	lstat("./sdf", &teststat);
 	print_type(teststat.st_mode);
 	time = ctime(&teststat.st_mtime);
 	printf("%s\n", time);
+	perror("asd");
+
+	
 	return 0;
 }

@@ -17,7 +17,7 @@ int		process_args(int ac, const char **av, t_flag *flags, t_dir *dirlist)
 			break;
 	}
 	//process_dirs
-	if ((stat(*av, &dirstat)) == -1)
+	if ((lstat(*av, &dirstat)) == -1)
 		perror(*av);
 		// ei tea kas tuleb oige error, ilmselt peaks olema mingi ls: " " jne
 }
