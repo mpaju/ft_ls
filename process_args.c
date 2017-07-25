@@ -1,10 +1,11 @@
-int		process_args(int ac, const char **av, t_flag *flags, t_dir *dirlist)
+#include "ft_ls.h"
+
+void		process_args(int ac, const char **av, t_flag *flags, t_list *arglist)
 {
 	int			i;
 	struct stat	dirstat;
 	time_t		time;
 	t_dir		*newdir;
-	t_flag		flags;
 
 	i = 1;
 	av++;
@@ -15,6 +16,12 @@ int		process_args(int ac, const char **av, t_flag *flags, t_dir *dirlist)
 		i++;
 		if (*av == '\0')
 			break;
+	}
+	while (*av && i < ac)
+	{
+		first_sort(*av, arglist)
+		av++;
+		i++
 	}
 	//process_dirs
 	if ((lstat(*av, &dirstat)) == -1)

@@ -6,7 +6,7 @@
 /*   By: mpaju <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 11:58:24 by mpaju             #+#    #+#             */
-/*   Updated: 2016/11/16 19:13:18 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/07/24 14:26:38 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int					ft_isdigit(int c);
 int					ft_isprint(int c);
 char				*ft_itoa(int n);
 void				ft_lstadd(t_list **alst, t_list *newlst);
+int					ft_lstaddlast(t_list **alst, t_list *newlist);
 void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));

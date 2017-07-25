@@ -48,6 +48,6 @@ void	ft_ls(t_dir *paths, t_flag *flags);
 void	check_empty_arg(int ac, const char **av);
 int		get_args(int ac, const char **av, t_flag *flags, t_dir *dirlist);
 t_dir	*tdirnew(char *name, time_t time);
-void	process_args(int ac, const char **av, t_flag *flags, t_dir *dirlist);
+void	process_args(int ac, const char **av, t_flag *flags, t_list *dirlist);
 void	process_flags(const char *av, t_flag *flags);
 #endif

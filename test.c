@@ -10,12 +10,13 @@ int main(int argc, const char *argv[])
 {
 	struct stat teststat;
 	char *time;
+	int		ret;
 
-	lstat("./sdf", &teststat);
+	ret = lstat("./link", &teststat);
 	print_type(teststat.st_mode);
 	time = ctime(&teststat.st_mtime);
 	printf("%s\n", time);
-	perror("asd");
+	printf("return: %i\n", ret);
 
 	
 	return 0;

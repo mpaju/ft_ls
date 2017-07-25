@@ -27,12 +27,12 @@ int main(int ac, const char **av)
 	struct stat		for_time;
 	char			*tmp;
 	t_flag			flags;
-	t_dir			dirlist;
+	t_list			arglist;
 
 	check_empty_arg(ac, av);
-	process_args(ac, av, &flags, &dirlist);
+	process_args(ac, av, &flags, &arglist);
 	// siin peaks nuud failinimed ka prinditud olema + errorid vale nime puhul
-	ft_ls(&dirlist, &flags);
+	ft_ls(&arglist, &flags);
 	if (!(homedir = opendir(".")))
 		return 0;
 	//filedata.name = (char *)ft_memalloc(sizeof(char) * 256);
