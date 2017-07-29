@@ -19,9 +19,9 @@ void		process_args(int ac, const char **av, t_flag *flags, t_list *arglist)
 	}
 	while (*av && i < ac)
 	{
-		first_sort(*av, arglist)
+		first_sort(*av, arglist);
 		av++;
-		i++
+		i++;
 	}
 	//process_dirs
 	if ((lstat(*av, &dirstat)) == -1)
