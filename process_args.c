@@ -1,6 +1,6 @@
 #include "ft_ls.h"
 
-void		process_args(int ac, const char **av, t_flag *flags, t_list *arglist)
+void		process_args(int ac, const char **av, t_flag *flags, t_file **filelist)
 {
 	int			i;
 	struct stat	dirstat;
@@ -19,12 +19,8 @@ void		process_args(int ac, const char **av, t_flag *flags, t_list *arglist)
 	}
 	while (*av && i < ac)
 	{
-		first_sort(*av, arglist);
+		first_sort(*av, filelist);
 		av++;
 		i++;
 	}
-	//process_dirs
-	if ((lstat(*av, &dirstat)) == -1)
-		perror(*av);
-		// ei tea kas tuleb oige error, ilmselt peaks olema mingi ls: " " jne
 }

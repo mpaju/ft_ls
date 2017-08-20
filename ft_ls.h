@@ -44,10 +44,17 @@ typedef struct		s_file {
 	struct s_file	*next;
 }					t_file;
 
-void	ft_ls(t_dir *paths, t_flag *flags);
+void	ft_ls(t_file **filelist, t_flag *flags);
 void	check_empty_arg(int ac, const char **av);
+void	check_invalid_files(t_flag *flags, t_file **filelist);
+void	first_sort(const char *av, t_file **filelist);
 int		get_args(int ac, const char **av, t_flag *flags, t_dir *dirlist);
 t_dir	*tdirnew(char *name, time_t time);
-void	process_args(int ac, const char **av, t_flag *flags, t_list *dirlist);
+t_file	*tfilenew(char *name);
+void	process_args(int ac, const char **av, t_flag *flags, t_file **filelist);
 void	process_flags(const char *av, t_flag *flags);
+void	tfile_add_first(t_file *newitem, t_file **filelist);
+void	tfile_add_after(t_file *newitem, t_file *filelist);
+void	tfile_add_last(t_file *newitem, t_file *filelist);
+void	wrong_flag(const char *av);
 #endif

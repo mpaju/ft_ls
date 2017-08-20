@@ -1,4 +1,4 @@
-
+#include "ft_ls.h"
 
 void		process_flags(const char *av, t_flag *flags)
 {
