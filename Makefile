@@ -6,7 +6,7 @@
 #    By: valdisemacpro <valdisemacpro@student.42.fr>+#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/20 20:38:05 by valdisemacpro     #+#    #+#              #
-#    Updated: 2017/08/20 20:53:14 by valdisemacpro    ###   ########.fr        #
+#    Updated: 2017/08/21 21:36:17 by valdisemacpro    ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 CC = gcc
@@ -17,7 +17,10 @@ SRC_FILES = main.c \
 			process_flags.c \
 			errors.c \
 			ft_ls.c\
+			first_args_printing.c \
 			first_sort.c \
+			sort.c \
+			sort_help.c \
 			tfile_ops.c \
 			tdir_ops.c
 SRCDIR = sources/

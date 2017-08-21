@@ -1,5 +1,29 @@
 #include "ft_ls.h"
 
+void	reverse_tdir_list(t_dir **arglist)
+{
+	t_dir	*prev;
+	t_dir	*current;
+	t_dir	*next;
+
+	current = *arglist;
+	next = current->next;
+	current->next = NULL;
+	while(next)
+	{
+		prev = current;
+		current = next;
+		next = current->next;
+		current->next = prev;
+		if (next->next == NULL)
+		{
+			next->next = current;
+			*arglist = next;
+			return ;
+		}
+	}
+}
+
 void	sort_by_time(t_dir **diritem, t_dir **arglist)
 {
 	t_dir	**link;
@@ -9,8 +33,16 @@ void	sort_by_time(t_dir **diritem, t_dir **arglist)
 	current = *arglist;
 	while (current)
 	{
-		if (has_lower_int_value(current->))
+		if (is_modified_later((*diritem)->time, current->time))
+		{
+			*link = *diritem;
+			(*diritem)->next = current;
+			return ;
+		}
+		current = current->next;
+		link = &(*link)->next;
 	}
+	*link = *diritem;
 }
 
 void	insert_into_arglist(t_flag *flags, t_dir **diritem, t_dir **arglist)
@@ -38,6 +70,9 @@ void	sort_filelist_into_arglist(t_flag *flags, t_file **filelist, t_dir **arglis
 	{
 		lstat(current->name, &statinfo);
 		diritem = tdirnew(current->name, statinfo.st_mtime);
-		insert_into_arglist(flags, diritem, arglist);
+		insert_into_arglist(flags, &diritem, arglist);
+		current = current->next;
 	}
+	if (flags->flag_r)
+		reverse_tdir_list(arglist);
 }
