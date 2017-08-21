@@ -44,7 +44,7 @@ typedef struct		s_file {
 	struct s_file	*next;
 }					t_file;
 
-void	ft_ls(t_file **filelist, t_flag *flags);
+void	ft_ls(t_flag *flags, t_file **filelist);
 void	check_empty_arg(int ac, const char **av);
 void	check_invalid_files(t_flag *flags, t_file **filelist);
 void	first_sort(const char *av, t_file **filelist);
