@@ -32,6 +32,7 @@ typedef struct		s_dir {
 	char			*name;
 	char			*path;
 	time_t			time;
+	struct stat		stat;
 	struct s_dir	*subdir;
 	struct s_dir	*filelist;
 	struct s_dir	*next;

@@ -4,19 +4,30 @@
 #include <unistd.h>
 #include "ft_ls.h"
 
-void print_type(mode_t mode);
+typedef struct s_stat{
+	char *name;
+	struct stat stat;
+}		t_stat;
+
+void	testapp(t_stat **tstat)
+{
+	struct stat statval;
+	int		ret;
+
+	ret = lstat("./link", &(*tstat)->stat);
+}
 
 int main(int argc, const char *argv[])
 {
-	struct stat teststat;
+	t_stat	*tstat;
+	struct stat statval;
+	struct stat *teststat;
 	char *time;
-	int		ret;
 
-	ret = lstat("./link", &teststat);
-	print_type(teststat.st_mode);
-	time = ctime(&teststat.st_mtime);
+	tstat = (t_stat *)malloc(sizeof(tstat));
+	testapp(&tstat);
+	time = ctime(&(tstat)->stat.st_mtime);
 	printf("%s\n", time);
-	printf("return: %i\n", ret);
 
 	
 	return 0;

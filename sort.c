@@ -62,14 +62,12 @@ void	sort_filelist_into_arglist(t_flag *flags, t_file **filelist, t_dir **arglis
 {
 	t_file	*current;
 	t_dir	*diritem;
-	struct stat	statinfo;
-
 
 	current = *filelist;
 	while (current)
 	{
-		lstat(current->name, &statinfo);
-		diritem = tdirnew(current->name, statinfo.st_mtime);
+		lstat(current->name, &(*arglist)->stat);
+		diritem = tdirnew(current->name, &(*arglist)->stat.st_mtime);
 		insert_into_arglist(flags, &diritem, arglist);
 		current = current->next;
 	}

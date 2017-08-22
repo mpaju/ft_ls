@@ -26,7 +26,6 @@ int main(int ac, const char **av)
 	check_empty_arg(ac, av);
 	process_args(ac, av, &flags, &filelist);
 	print_invalid_files(&flags, &filelist);
-	print_normal_files(&filelist);
 	// siin peaks nuud failinimed ka prinditud olema + errorid vale nime puhul
 	ft_ls(&flags, &filelist);
 
