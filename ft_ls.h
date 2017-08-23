@@ -48,13 +48,13 @@ typedef struct		s_file {
 void	ft_ls(t_flag *flags, t_file **filelist);
 void	check_empty_arg(int ac, const char **av);
 void	print_invalid_files(t_flag *flags, t_file **filelist);
-void	print_normal_files(t_file **filelist);
+void	print_normal_files(t_flag *flags, t_dir **arglist);
 void	first_sort(const char *av, t_file **filelist);
 int		get_args(int ac, const char **av, t_flag *flags, t_dir *dirlist);
 int		has_lower_alpha_value(char *str1, char *str2);
 void	insert_last_pos(t_dir **diritem, t_dir **arglist);
 int		is_modified_later(int val1, int val2);
-t_dir	*tdirnew(char *name, time_t time);
+t_dir	*tdirnew(char *name);
 t_file	*tfilenew(char *name);
 void	process_args(int ac, const char **av, t_flag *flags, t_file **filelist);
 void	process_flags(const char *av, t_flag *flags);

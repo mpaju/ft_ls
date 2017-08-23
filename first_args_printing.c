@@ -18,17 +18,39 @@ void	find_first_valid(t_file **filelist)
 			return ;
 	}
 }
-
-void	print_normal_files(t_file **filelist)
+void	print_file_info(t_flag *flags, t_dir *current)
 {
-	struct stat	filestat;
-	t_file	*current;
+	printf("print_file_info: %s\n", current->name);
+}
 
-	current = *filelist;
-	while (current)
+void	print_normal_files(t_flag *flags, t_dir **arglist)
+{
+	t_dir	**link;
+	t_dir	*current;
+	t_dir	*tmp;
+
+	link = arglist;
+	current = *arglist;
+	while (current->next)
 	{
-		lstat(current->name, &filestat);
-		if (S_ISREG(&filestat))
+		if (!(S_ISDIR(current->stat.st_mode)))
+		{
+			print_file_info(flags, current);
+			tmp = current;
+			current = current->next;
+			free(tmp);
+			*link = current;
+			continue;
+		}
+		current = current->next;
+		link = &(*link)->next;
+	}
+	if (!(S_ISDIR(current->stat.st_mode)))
+	{
+		print_file_info(flags, current);
+		free(current);
+		arglist = NULL;
+		exit (1);
 	}
 }
 
