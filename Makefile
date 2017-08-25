@@ -6,7 +6,7 @@
 #    By: valdisemacpro <valdisemacpro@student.42.fr>+#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/20 20:38:05 by valdisemacpro     #+#    #+#              #
-#    Updated: 2017/08/21 21:36:17 by valdisemacpro    ###   ########.fr        #
+#    Updated: 2017/08/25 06:13:44 by valdisemacpro    ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 CC = gcc
@@ -16,13 +16,15 @@ SRC_FILES = main.c \
 			process_args.c \
 			process_flags.c \
 			errors.c \
+			filename_ops.c \
 			ft_ls.c\
 			first_args_printing.c \
 			first_sort.c \
 			sort.c \
 			sort_help.c \
 			tfile_ops.c \
-			tdir_ops.c
+			tdir_ops.c \
+			tmp_print.c
 SRCDIR = sources/
 SRCS = $(SRC_FILES)
 

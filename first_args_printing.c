@@ -18,16 +18,16 @@ void	find_first_valid(t_file **filelist)
 			return ;
 	}
 }
+
 void	print_file_info(t_flag *flags, t_dir *current)
 {
 	printf("print_file_info: %s\n", current->name);
 }
 
-void	print_normal_files(t_flag *flags, t_dir **arglist)
+void	print_and_remove_normal_files(t_flag *flags, t_dir **arglist)
 {
 	t_dir	**link;
 	t_dir	*current;
-	t_dir	*tmp;
 
 	link = arglist;
 	current = *arglist;
@@ -36,9 +36,8 @@ void	print_normal_files(t_flag *flags, t_dir **arglist)
 		if (!(S_ISDIR(current->stat.st_mode)))
 		{
 			print_file_info(flags, current);
-			tmp = current;
 			current = current->next;
-			free(tmp);
+			free(*link);
 			*link = current;
 			continue;
 		}

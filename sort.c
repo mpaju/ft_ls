@@ -11,16 +11,16 @@ void	reverse_tdir_list(t_dir **arglist)
 	current->next = NULL;
 	while(next)
 	{
-		prev = current;
-		current = next;
-		next = current->next;
-		current->next = prev;
 		if (next->next == NULL)
 		{
 			next->next = current;
 			*arglist = next;
 			return ;
 		}
+		prev = current;
+		current = next;
+		next = current->next;
+		current->next = prev;
 	}
 }
 

@@ -15,7 +15,11 @@ t_dir	*tdirnew(char *name)
 	else
 		ret->name = NULL;
 	if ((lstat(name, &ret->stat)) != -1)
+	{
+		ret->bname = get_basename(ret->name);
+		ret->path = get_pathname(ret->name);
 		ret->time = ret->stat.st_mtime;
+	}
 	else
 		ret->time = 0;
 	return (ret);
