@@ -23,6 +23,12 @@ $(NAME):
 	@ranlib $(NAME)
 	@echo "\033[0;32mLibft make all done"
 
+deb:
+	@$(CC) $(FLAGS) -c $(FILES) -g $(HEAD)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
+	@echo "\033[0;32mLibft make deb done"
+
 clean:
 	@rm -f $(OBJ)
 	@echo "\033[0;32mLibft make clean done"

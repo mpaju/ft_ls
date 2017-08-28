@@ -44,7 +44,7 @@ all:
 	@$(CC) $(SRCS) -o $(NAME) $(LIB_FLAGS)
 
 deb:
-	@make -C $(LIBDIR)
+	@make deb -C $(LIBDIR)
 	@$(CC)  $(SRCS) -o $(NAME) -g $(LIB_FLAGS)
 
 clean:

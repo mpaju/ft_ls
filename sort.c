@@ -24,6 +24,27 @@ void	reverse_tdir_list(t_dir **arglist)
 	}
 }
 
+void	sort_by_name(t_dir **item, t_dir **list)
+{
+	t_dir	*current;
+	t_dir	**link;
+
+	current = *list;
+	link = list;
+	while (current)
+	{
+		if ((has_lower_alpha_value((*item)->bname, current->bname)))
+		{
+			*link = *item;
+			(*item)->next = current;
+			return ;
+		}
+		current = current->next;
+		link = &(*link)->next;
+	}
+	*link = *item;
+}
+
 void	sort_by_time(t_dir **diritem, t_dir **arglist)
 {
 	t_dir	**link;

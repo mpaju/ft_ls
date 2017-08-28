@@ -1,3 +1,4 @@
+/* ************************************************************************** */
 #include "ft_ls.h"
 
 /*
@@ -24,6 +25,7 @@ void	give_tdir(flags, arglist)
 	}
 }
 */
+
 char	*get_pathname(char *name)
 {
 	int	size;
@@ -37,27 +39,6 @@ char	*get_pathname(char *name)
 	return (ft_strncpy(ft_strnew(size + 2), name, size + 1));
 }
 
-void	sort_by_alpha(t_dir **item, t_dir **list)
-{
-	t_dir	*current;
-	t_dir	**link;
-
-	current = *list;
-	link = list;
-	while (current)
-	{
-		if ((has_lower_alpha_value((*item)->bname, current->bname)))
-		{
-			*link = *item;
-			(*item)->next = current;
-			return ;
-		}
-		current = current->next;
-		link = &(*link)->next;
-	}
-	*link = *item;
-}
-
 void	sort_stuff(t_flag *flags, t_dir **item, t_dir **list)
 {
 	if (!(*list))
@@ -68,42 +49,75 @@ void	sort_stuff(t_flag *flags, t_dir **item, t_dir **list)
 	if (flags->flag_t)
 		sort_by_time(item, list);
 	else
-		sort_by_alpha(item, list);
+		sort_by_name(item, list);
 }
-
-void	get_dir_data(t_flag *flags, t_dir **arglist)
+/*
+void	get_info
 {
 	DIR 			*dir;
 	struct dirent	*open_dir;
+
+	if ((dir = opendir (current->name)) != NULL) 
+		{
+			while ((open_dir = readdir (dir)) != NULL) 
+			{
+				item = tdirnew(ft_strjoin(current->name, ft_strjoin("/", open_dir->d_name)));
+		  	}
+		  	closedir (dir);
+		} 
+		else
+		{
+		  	perror (current->name);
+		  	return ;
+		}
+}
+*/	
+
+void	smth(t_flag *flags, t_dir **arg)
+{
+	DIR 			*dir;
+	struct dirent	*open_dir;
+	t_dir			*item;
+	t_dir			*current;
+
+	if ((dir = opendir ((*arg)->name)) != NULL) 
+	{
+	  /* print all the files and directories within directory */
+		while ((open_dir = readdir (dir)) != NULL) 
+		{
+			// vbla polnud koige parem mote tdirnew-d muuta
+			item = tdirnew(ft_strjoin((*arg)->name, ft_strjoin("/", open_dir->d_name)));
+			sort_stuff(flags, &item, &(*arg)->subfiles);
+			// kui filelist eksisteerib, siis hakka sinna sisse sortima uusi itemeid
+	  	}
+	  	closedir (dir);
+	} 
+	else
+	{
+	  /* could not open directory */
+	  	perror ((*arg)->name);
+	  	return ;
+	}
+	current = (*arg)->subfiles;
+	while (current)
+	{
+		if (flags->flag_R && S_ISDIR(current->stat.st_mode) && ft_strcmp(current->bname, ".") && ft_strcmp(current->bname, ".."))
+	  	{
+	  		smth(flags, &current);
+	  	}
+		current = current->next;
+	}
+}
+void	get_dir_data(t_flag *flags, t_dir **arglist)
+{
 	t_dir			*current;
 	t_dir			*item;
 
 	current = *arglist;
 	while (current)
 	{
-		if ((dir = opendir (current->name)) != NULL) 
-		{
-		  /* print all the files and directories within directory */
-			while ((open_dir = readdir (dir)) != NULL) 
-			{
-				// vbla polnud koige parem mote tdirnew-d muuta
-				item = tdirnew(ft_strjoin(current->name, ft_strjoin("/", open_dir->d_name)));
-				sort_stuff(flags, &item, &current->filelist);
-				// kui filelist eksisteerib, siis hakka sinna sisse sortima uusi itemeid
-		  		if (flags->flag_R && S_ISDIR(item->stat.st_mode))
-		  		{
-		  			sort_stuff(flags, &item, &current->subdir);
-		  			get_dir_data(flags, &current->subdir);
-		  		}
-		  	}
-		  	closedir (dir);
-		} 
-		else
-		{
-		  /* could not open directory */
-		  	perror ("");
-		  	return ;
-		}
+		//printf("%s\n", current->bname);
+		smth(flags, &current);	
 		current = current->next;
 	}
 }
@@ -112,6 +126,7 @@ void	ft_ls(t_flag *flags, t_file **filelist)
 {
 	t_dir	*arglist;
 
+	arglist = NULL;
 	sort_filelist_into_arglist(flags, filelist, &arglist);
 	print_and_remove_normal_files(flags, &arglist);
 	get_dir_data(flags, &arglist);

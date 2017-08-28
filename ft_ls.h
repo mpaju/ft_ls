@@ -34,8 +34,7 @@ typedef struct		s_dir {
 	char			*path;
 	time_t			time;
 	struct stat		stat;
-	struct s_dir	*subdir;
-	struct s_dir	*filelist;
+	struct s_dir	*subfiles;
 	struct s_dir	*next;
 }					t_dir;
 
@@ -63,7 +62,7 @@ void	print_tdir_items(t_dir **arglist);
 void	process_args(int ac, const char **av, t_flag *flags, t_file **filelist);
 void	process_flags(const char *av, t_flag *flags);
 void	reverse_tdir_list(t_dir **arglist);
-void	sort_by_alpha(t_dir **item, t_dir **list);
+void	sort_by_name(t_dir **item, t_dir **list);
 void	sort_by_time(t_dir **diritem, t_dir **arglist);
 void	sort_filelist_into_arglist(t_flag *flags, t_file **filelist, t_dir **arglist);
 void	tfile_add_first(t_file *newitem, t_file **filelist);
