@@ -2,8 +2,9 @@
 
 void	print_single_dir(t_flag *flags, t_dir **arglist)
 {
-	printf("%s\n", (*arglist)->bname);
 	if ((*arglist)->subfiles)
+		/*printf("%s\n", (*arglist)->bname);
+	if ((*arglist)->subfiles)*/
 		print_tdir_items(flags, &(*arglist)->subfiles);
 }
 
@@ -12,7 +13,9 @@ void	print_tdir_items(t_flag *flags, t_dir **arglist)
 	t_dir	*current;
 
 	current = *arglist;
-	printf("\n%s:\n", current->path);
+	if (!current)
+		return ;
+	printf("%s:\n", current->path);
 	while (current)
 	{
 		if (current->error_nr)
@@ -26,10 +29,13 @@ void	print_tdir_items(t_flag *flags, t_dir **arglist)
 		current = current->next;
 	}
 	current = *arglist;
-	while (current)
-	{
-		if (current->subfiles)
-			print_tdir_items(flags, &current->subfiles);
-		current = current->next;
-	}
+	//while (current)
+	//{
+	if (current->subfiles)
+		print_tdir_items(flags, &current->subfiles);
+	if (current->next)
+		print_tdir_items(flags, &current->next);
+	//	current = current->next;
+	//}
+
 }

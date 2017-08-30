@@ -17,6 +17,8 @@ void		process_args(int ac, const char **av, t_flag *flags, t_file **filelist)
 		if (*av == '\0')
 			break;
 	}
+	if (ac - i == 1)
+		flags->single_dir = 1;
 	while (*av && i < ac)
 	{
 		first_sort(*av, filelist);
