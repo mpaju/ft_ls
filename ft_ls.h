@@ -25,6 +25,7 @@ typedef struct		s_flag {
 	char			flag_r;
 	char			flag_R;
 	char			flag_t;
+	char			single_dir;
 	char			not_first_line;
 }					t_flag;
 
@@ -32,6 +33,7 @@ typedef struct		s_dir {
 	char			*name;
 	char			*bname;
 	char			*path;
+	int 			error_nr;	
 	time_t			time;
 	struct stat		stat;
 	struct s_dir	*subfiles;
@@ -58,7 +60,8 @@ t_dir	*tdirnew(char *name);
 t_file	*tfilenew(char *name);
 void	print_invalid_files(t_flag *flags, t_file **filelist);
 void	print_and_remove_normal_files(t_flag *flags, t_dir **arglist);
-void	print_tdir_items(t_dir **arglist);
+void	print_single_dir(t_flag *flags, t_dir **arglist);
+void	print_tdir_items(t_flag *flags, t_dir **arglist);
 void	process_args(int ac, const char **av, t_flag *flags, t_file **filelist);
 void	process_flags(const char *av, t_flag *flags);
 void	reverse_tdir_list(t_dir **arglist);

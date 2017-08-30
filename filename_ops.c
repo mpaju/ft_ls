@@ -10,7 +10,6 @@ char	*get_basename(char *name)
 	{
 		if (name[size] == '/')
 		{
-			printf("tramiks: %s\n", &name[size + 1]);
 			fflush(stdout);
 			ret = ft_strdup(&(name[size + 1]));
 			return (ret);

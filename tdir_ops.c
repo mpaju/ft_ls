@@ -21,6 +21,10 @@ t_dir	*tdirnew(char *name)
 		ret->time = ret->stat.st_mtime;
 	}
 	else
-		ret->time = 0;
+	{
+		ret->bname = get_basename(ret->name);
+		ret->path = get_pathname(ret->name);
+		ret->error_nr = errno;
+	}
 	return (ret);
 }

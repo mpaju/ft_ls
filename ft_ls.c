@@ -32,7 +32,7 @@ char	*get_pathname(char *name)
 
 	size = ft_strlen(name);
 	size--;
-	while ((name[size]) != '/')
+	while ((name[size]) != '/' && size != -1)
 		size--;
 	if (size == -1)
 		return (ft_strjoin(name, "/"));
@@ -73,6 +73,19 @@ void	get_info
 }
 */	
 
+void	print_smth(t_flag *flags, t_dir **item)
+{
+	t_dir	*current;
+
+	printf("%s:\n", (*item)->name);
+	current = (*item)->subfiles;
+	while (current)
+	{
+		printf("%s\n", current->bname);
+		current = current->next;
+	}
+}
+
 void	smth(t_flag *flags, t_dir **arg)
 {
 	DIR 			*dir;
@@ -86,11 +99,16 @@ void	smth(t_flag *flags, t_dir **arg)
 		while ((open_dir = readdir (dir)) != NULL) 
 		{
 			// vbla polnud koige parem mote tdirnew-d muuta
-			item = tdirnew(ft_strjoin((*arg)->name, ft_strjoin("/", open_dir->d_name)));
-			sort_stuff(flags, &item, &(*arg)->subfiles);
+			if ((!flags->flag_a && ft_strncmp(open_dir->d_name, ".", 1)) || flags->flag_a)
+			{
+				item = tdirnew(ft_strjoin((*arg)->name, ft_strjoin("/", open_dir->d_name)));
+				sort_stuff(flags, &item, &(*arg)->subfiles);
+			}
 			// kui filelist eksisteerib, siis hakka sinna sisse sortima uusi itemeid
 	  	}
 	  	closedir (dir);
+	  	if (flags->flag_r && (*arg)->subfiles)
+	  		reverse_tdir_list(&(*arg)->subfiles);
 	} 
 	else
 	{
@@ -103,6 +121,7 @@ void	smth(t_flag *flags, t_dir **arg)
 	{
 		if (flags->flag_R && S_ISDIR(current->stat.st_mode) && ft_strcmp(current->bname, ".") && ft_strcmp(current->bname, ".."))
 	  	{
+	  		//print_smth(flags, &current);
 	  		smth(flags, &current);
 	  	}
 		current = current->next;
@@ -130,7 +149,7 @@ void	ft_ls(t_flag *flags, t_file **filelist)
 	sort_filelist_into_arglist(flags, filelist, &arglist);
 	print_and_remove_normal_files(flags, &arglist);
 	get_dir_data(flags, &arglist);
-	print_tdir_items(&arglist);
+	flags->single_dir ? print_single_dir(flags, &arglist) : print_tdir_items(flags, &arglist);
 	
 	return ;
 }
