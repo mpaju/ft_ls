@@ -93,10 +93,17 @@ void	print_arglist(t_flag *flags, t_dir **arglist)
 		printf("%s:\n", current->name);
 		flags->first_line = 0;
 		print_subs(&current->subfiles);
-		print_arglist(flags, &current->subfiles);
+	// 	print_arglist(flags, &current->subfiles);
 	}
-	if (current->next)
-		print_arglist(flags, &current->next);
+	else
+	{
+		if (!flags->first_line)
+			printf("X\n");
+		printf("%s:\n", current->name);
+		flags->first_line = 0;
+	}
+	// if (current->next)
+	// 	print_arglist(flags, &current->next);
 
 }
 
@@ -104,5 +111,6 @@ void	print_single_dir(t_flag *flags, t_dir **arglist)
 {
 	print_subs(&(*arglist)->subfiles);
 	flags->first_line = 0;
-	print_arglist(flags, &(*arglist)->subfiles);
+	flags->single_dir = 0;
+	// print_arglist(flags, &(*arglist)->subfiles);
 }

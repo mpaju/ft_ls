@@ -77,12 +77,14 @@ t_dir	*free_tdir_and_return_next(t_dir *item)
 {
 	t_dir	*next;
 
-	if (*item)
+	if (item)
 	{
 		next = item->next;
-		free(item->name);
-		free(item->bname);
-		free(item->path);
+		if (item->name)
+			free(item->name);
+		if (item->path)
+			free(item->path);
+		free(item);
 	}
 	return (next);
 	// char			*name;
@@ -138,6 +140,7 @@ void	smth(t_flag *flags, t_dir **arg)
 	  	perror ((*arg)->name);
 	  	return ;
 	}
+	flags->single_dir ? print_single_dir(flags, arg) : print_arglist(flags, arg);
 	current = (*arg)->subfiles;
 	while (current)
 	{
@@ -147,7 +150,7 @@ void	smth(t_flag *flags, t_dir **arg)
 	  		smth(flags, &current);
 	  	}
 	  	// should free current here
-		current = current->next;
+		current = free_tdir_and_return_next(current);
 	}
 }
 void	get_dir_data(t_flag *flags, t_dir **arglist)
@@ -160,7 +163,7 @@ void	get_dir_data(t_flag *flags, t_dir **arglist)
 	{
 		//printf("%s\n", current->bname);
 		smth(flags, &current);	
-		current = current->next;
+		current = free_tdir_and_return_next(current);
 	}
 }
 
@@ -176,7 +179,7 @@ void	ft_ls(t_flag *flags, t_file **filelist)
 	if (!arglist)
 		exit(1);
 	get_dir_data(flags, &arglist);
-	flags->single_dir ? print_single_dir(flags, &arglist) : print_arglist(flags, &arglist);
+	//flags->single_dir ? print_single_dir(flags, &arglist) : print_arglist(flags, &arglist);
 	ft_putchar('\b');
 	return ;
 }
