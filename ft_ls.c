@@ -73,6 +73,28 @@ void	get_info
 }
 */	
 
+t_dir	*free_tdir_and_return_next(t_dir *item)
+{
+	t_dir	*next;
+
+	if (*item)
+	{
+		next = item->next;
+		free(item->name);
+		free(item->bname);
+		free(item->path);
+	}
+	return (next);
+	// char			*name;
+	// char			*bname;
+	// char			*path;
+	// int 			error_nr;	
+	// time_t			time;
+	// struct stat		stat;
+	// struct s_dir	*subfiles;
+	// struct s_dir	*next;
+}
+
 void	print_smth(t_flag *flags, t_dir **item)
 {
 	t_dir	*current;
@@ -124,6 +146,7 @@ void	smth(t_flag *flags, t_dir **arg)
 	  		//print_smth(flags, &current);
 	  		smth(flags, &current);
 	  	}
+	  	// should free current here
 		current = current->next;
 	}
 }
@@ -141,6 +164,8 @@ void	get_dir_data(t_flag *flags, t_dir **arglist)
 	}
 }
 
+
+
 void	ft_ls(t_flag *flags, t_file **filelist)
 {
 	t_dir	*arglist;
@@ -148,8 +173,10 @@ void	ft_ls(t_flag *flags, t_file **filelist)
 	arglist = NULL;
 	sort_filelist_into_arglist(flags, filelist, &arglist);
 	print_and_remove_normal_files(flags, &arglist);
+	if (!arglist)
+		exit(1);
 	get_dir_data(flags, &arglist);
-	flags->single_dir ? print_single_dir(flags, &arglist) : print_tdir_items(flags, &arglist);
-	
+	flags->single_dir ? print_single_dir(flags, &arglist) : print_arglist(flags, &arglist);
+	ft_putchar('\b');
 	return ;
 }

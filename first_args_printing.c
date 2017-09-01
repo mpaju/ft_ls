@@ -36,6 +36,7 @@ void	print_and_remove_normal_files(t_flag *flags, t_dir **arglist)
 		if (!(S_ISDIR(current->stat.st_mode)))
 		{
 			print_file_info(flags, current);
+			flags->first_line = 0;
 			current = current->next;
 			free(*link);
 			*link = current;
@@ -47,9 +48,9 @@ void	print_and_remove_normal_files(t_flag *flags, t_dir **arglist)
 	if (!(S_ISDIR(current->stat.st_mode)))
 	{
 		print_file_info(flags, current);
+		flags->first_line = 0;
 		free(current);
-		arglist = NULL;
-		exit (1);
+		*link = NULL;
 	}
 }
 

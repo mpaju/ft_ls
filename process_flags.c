@@ -24,4 +24,5 @@ void		process_flags(const char *av, t_flag *flags)
 			wrong_flag(av);
 		av++;
 	}
+	flags->first_line = 1;
 }
