@@ -77,11 +77,28 @@ void	print_total_blocks(t_dir *item)
 	}
 	ft_putstr("total ");
 	ft_putstr(ft_itoa(total));
+	ft_putchar('\n');
 }
+void	print_rights(mode_t mode)
+{
 
+	mode & S_IRUSR ? ft_putchar('r') : ft_putchar('-');
+	mode & S_IWUSR ? ft_putchar('w') : ft_putchar('-');
+	mode & S_IXUSR ? ft_putchar('x') : ft_putchar('-');
+	mode & S_IRGRP ? ft_putchar('r') : ft_putchar('-');
+	mode & S_IWGRP ? ft_putchar('w') : ft_putchar('-');
+	mode & S_IXGRP ? ft_putchar('x') : ft_putchar('-');
+	mode & S_IROTH ? ft_putchar('r') : ft_putchar('-');
+	mode & S_IWOTH ? ft_putchar('w') : ft_putchar('-');
+	mode & S_IXOTH ? ft_putchar('x') : ft_putchar('-');
+}
 void	print_ftype_and_rights(t_dir *item)
 {
-	print_type(item->stat.st_mode);
+	mode_t	mode;
+
+	mode = item->stat.st_mode;
+	print_type(mode);
+	print_rights(mode);
 	ft_putchar(' ');
 
 }
@@ -100,7 +117,7 @@ void	print_username(t_flag *flags, t_dir *item)
 	pwinfo = getpwuid(item->stat.st_uid);
 	strlen = ft_strlen(pwinfo->pw_name);
 	ft_putstr(pwinfo->pw_name);
-	ft_print_chars(' ', strlen - flags->userlen);
+	ft_print_chars(' ', flags->userlen - strlen);
 	ft_putchar(' ');
 }
 
@@ -114,7 +131,7 @@ void	print_groupname(t_flag *flags, t_dir *item)
 	grpinfo = getgrgid(item->stat.st_gid);
 	strlen = ft_strlen(grpinfo->gr_name);
 	ft_putstr(grpinfo->gr_name);
-	ft_print_chars(' ', strlen - flags->grouplen);
+	ft_print_chars(' ', flags->grouplen - strlen);
 	ft_putchar(' ');
 }
 
@@ -125,27 +142,42 @@ void	print_filesize(t_dir *item)
 
 	if (S_ISBLK(item->stat.st_mode) || S_ISCHR(item->stat.st_mode))
 	{
-		value = ft_itoa((int)major(item->stat.st_dev));
+		value = ft_itoa((int)major(item->stat.st_rdev));
 		strlen = ft_strlen(value);
 		ft_print_chars(' ', 5 - strlen);
 		ft_putstr(value);
 		ft_putchar(',');
-		value = ft_itoa((int)minor(item->stat.st_dev));
+		value = ft_itoa((int)minor(item->stat.st_rdev));
 		strlen = ft_strlen(value);
 		ft_print_chars(' ', 5 - strlen);
 		ft_putstr(value);
 		ft_putchar(' ');
 	}
 	else
+	{
 		ft_putstr("filesize");
+		ft_putchar(' ');
+	}
 }
 
 void print_modtime(t_dir *item)
 {
-	char	*time;
+	char	**itemtime;
 
-	time = ctime(item->stat.st_mtime);
-	ft_putstr(time);
+	itemtime = ft_strsplit(ft_strdup(ctime(&item->stat.st_mtime)), ' ');
+	ft_putstr(itemtime[1]);
+	ft_strlen(itemtime[2]) < 2 ? ft_putstr("  ") : ft_putstr(" ");
+	ft_putstr(itemtime[2]);
+	ft_putchar(' ');
+	itemtime[4][ft_strlen(itemtime[4]) - 1] = '\0';
+	itemtime[3][ft_strlen(itemtime[3]) - 3] = '\0';
+	if (time(NULL) - item->stat.st_mtime < SIX_MONTHS_SEC)
+		ft_putstr(itemtime[3]);
+	else
+	{
+		ft_putstr(itemtime[4]);
+		ft_putchar(' ');
+	}
 	ft_putchar(' ');
 }
 
@@ -156,7 +188,7 @@ void	print_filename(t_dir *item)
 }
 
 
-static void	print_long_format(t_flag *flags, t_dir *item)
+void	print_long_format(t_flag *flags, t_dir *item)
 {
 	print_ftype_and_rights(item);
 	print_linkcount(item);
@@ -165,6 +197,7 @@ static void	print_long_format(t_flag *flags, t_dir *item)
 	print_filesize(item);
 	print_modtime(item);
 	print_filename(item);
+	ft_putchar('\n');
 }
 
 static void	print_subs(t_flag *flags, t_dir **arglist)
@@ -172,13 +205,13 @@ static void	print_subs(t_flag *flags, t_dir **arglist)
 	t_dir	*current;
 
 	current = *arglist;
-	if (flags->flag_a && current)
+	if (flags->flag_l && current)
 		print_total_blocks(current);
 	while (current)
 	{
 		if (current->error_nr)
 			printf("ls: %s\n", strerror(current->error_nr));
-		else if (flags->flag_a)
+		else if (flags->flag_l)
 			print_long_format(flags, current);
 		else
 			printf("%s\n", current->bname);

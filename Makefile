@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: valdisemacpro <valdisemacpro@student.42.fr>+#+  +:+       +#+         #
+#    By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/20 20:38:05 by valdisemacpro     #+#    #+#              #
-#    Updated: 2017/08/25 06:13:44 by valdisemacpro    ###   ########.fr        #
+#    Updated: 2017/09/02 19:23:58 by mpaju            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 CC = gcc
@@ -24,7 +24,8 @@ SRC_FILES = main.c \
 			sort_help.c \
 			tfile_ops.c \
 			tdir_ops.c \
-			tmp_print.c
+			tmp_print.c \
+			print.c
 SRCDIR = sources/
 SRCS = $(SRC_FILES)
 

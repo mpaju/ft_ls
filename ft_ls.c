@@ -171,6 +171,7 @@ void	get_dir_data(t_flag *flags, t_dir **arglist)
 		smth(flags, &current);	
 		current = free_tdir_and_return_next(current);
 	}
+	exit(1);
 }
 
 
@@ -186,6 +187,5 @@ void	ft_ls(t_flag *flags, t_file **filelist)
 		exit(1);
 	get_dir_data(flags, &arglist);
 	//flags->single_dir ? print_single_dir(flags, &arglist) : print_arglist(flags, &arglist);
-	ft_putchar('\b');
 	return ;
 }
