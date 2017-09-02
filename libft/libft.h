@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpaju <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 11:58:24 by mpaju             #+#    #+#             */
-/*   Updated: 2017/07/24 14:26:38 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/02 19:11:18 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int					ft_memcmp(const void *ptr1, const void *ptr2, size_t num);
 void				ft_memdel(void **ap);
 void				*ft_memmove(void *dest, const void *src, size_t num);
 void				*ft_memset(void *str, int c, size_t n);
+void				ft_print_chars(char chr, int count);
 void				ft_putchar(char c);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putendl(char const *s);

@@ -87,7 +87,7 @@ void	sort_filelist_into_arglist(t_flag *flags, t_file **filelist, t_dir **arglis
 	current = *filelist;
 	while (current)
 	{
-		diritem = tdirnew(current->name);
+		diritem = tdirnew(flags, current->name);
 		insert_into_arglist(flags, &diritem, arglist);
 		current = current->next;
 	}

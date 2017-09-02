@@ -81,9 +81,15 @@ t_dir	*free_tdir_and_return_next(t_dir *item)
 	{
 		next = item->next;
 		if (item->name)
+		{
 			free(item->name);
+			item->name = NULL;
+		}
 		if (item->path)
+		{
 			free(item->path);
+			item->path = NULL;
+		}
 		free(item);
 	}
 	return (next);
@@ -125,7 +131,7 @@ void	smth(t_flag *flags, t_dir **arg)
 			// vbla polnud koige parem mote tdirnew-d muuta
 			if ((!flags->flag_a && ft_strncmp(open_dir->d_name, ".", 1)) || flags->flag_a)
 			{
-				item = tdirnew(ft_strjoin((*arg)->name, ft_strjoin("/", open_dir->d_name)));
+				item = tdirnew(flags, ft_strjoin((*arg)->name, ft_strjoin("/", open_dir->d_name)));
 				sort_stuff(flags, &item, &(*arg)->subfiles);
 			}
 			// kui filelist eksisteerib, siis hakka sinna sisse sortima uusi itemeid
