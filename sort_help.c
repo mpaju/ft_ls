@@ -6,7 +6,7 @@
 /*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 14:43:28 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 20:01:00 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 20:14:36 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ void	sort_by_time(t_dir **diritem, t_dir **arglist)
 	current = *arglist;
 	while (current)
 	{
-		if (is_modified_later((*diritem)->time, current->time))
+		if (is_modified_later((*diritem)->time, current->time) || \
+			((*diritem)->time == current->time && \
+				(has_lower_alpha_value((*diritem)->bname, current->bname))))
 		{
 			*link = *diritem;
 			(*diritem)->next = current;
