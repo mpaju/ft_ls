@@ -6,7 +6,7 @@
 /*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 13:42:03 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 17:13:20 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 17:43:00 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	wrong_flag(const char *av)
 {
 	ft_putstr_fd("ls: illegal option -- ", 2);
 	ft_putchar_fd((char)*av, 2);
-	ft_putstr_fd("\nusage: ls [-alrRt] [file ...]\n", 2);
+	ft_putstr_fd("\nusage: ls [-alrRStT] [file ...]\n", 2);
 	exit(1);
 }
 

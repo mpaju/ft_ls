@@ -6,7 +6,7 @@
 /*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 15:06:23 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 16:40:09 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 17:48:05 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	print_filesize(t_dir *item)
 	}
 }
 
-void	print_modtime(t_dir *item)
+void	print_modtime(t_flag *flags, t_dir *item)
 {
 	char	**itemtime;
 
@@ -59,9 +59,17 @@ void	print_modtime(t_dir *item)
 	ft_putstr(itemtime[2]);
 	ft_putchar(' ');
 	itemtime[4][ft_strlen(itemtime[4]) - 1] = '\0';
-	itemtime[3][ft_strlen(itemtime[3]) - 3] = '\0';
-	if (time(NULL) - item->stat.st_mtime < SIX_MONTHS_SEC)
+	if (flags->flag_ut)
+	{
 		ft_putstr(itemtime[3]);
+		ft_putchar(' ');
+		ft_putstr(itemtime[4]);
+	}
+	else if (time(NULL) - item->stat.st_mtime < SIX_MONTHS_SEC)
+	{
+		itemtime[3][ft_strlen(itemtime[3]) - 3] = '\0';
+		ft_putstr(itemtime[3]);
+	}
 	else
 	{
 		ft_putchar(' ');

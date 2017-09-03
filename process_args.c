@@ -6,7 +6,7 @@
 /*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 14:42:58 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 16:31:29 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 17:37:20 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void		process_args(int ac, const char **av, t_flag *flags, \
 		i++;
 	}
 	flags->first_line = 1;
-	if (ac - i == 1 || ac == 1)
+	if (ac - i == 1 || ac == i)
 		flags->single_dir = 1;
 	while (*av && i < ac)
 	{

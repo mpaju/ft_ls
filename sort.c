@@ -6,11 +6,21 @@
 /*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 14:46:22 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 16:24:04 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 17:40:36 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void	insert_last_pos(t_dir **diritem, t_dir **arglist)
+{
+	t_dir	*current;
+
+	current = *arglist;
+	while (current->next)
+		current = current->next;
+	current->next = *diritem;
+}
 
 void	reverse_tdir_list(t_dir **arglist)
 {
@@ -43,7 +53,9 @@ void	sort_stuff(t_flag *flags, t_dir **item, t_dir **list)
 		*list = *item;
 		return ;
 	}
-	if (flags->flag_t)
+	if (flags->flag_us)
+		sort_by_size(item, list);
+	else if (flags->flag_t)
 		sort_by_time(item, list);
 	else
 		sort_by_name(item, list);

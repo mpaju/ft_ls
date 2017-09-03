@@ -6,7 +6,7 @@
 /*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 14:43:17 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 15:36:53 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 17:55:22 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@ void		process_flags(const char *av, t_flag *flags)
 {
 	int	av_strlen;
 
-	if (!(av) || !(flags))
+	if (!(av++) || !(flags))
 		return ;
-	av++;
 	av_strlen = ft_strlen(av);
 	while (*av && av_strlen--)
 	{
@@ -32,6 +31,10 @@ void		process_flags(const char *av, t_flag *flags)
 			flags->flag_ur = 1;
 		else if (*av == 't')
 			flags->flag_t = 1;
+		else if (*av == 'S')
+			flags->flag_us = 1;
+		else if (*av == 'T')
+			flags->flag_ut = 1;
 		else
 			wrong_flag(av);
 		av++;

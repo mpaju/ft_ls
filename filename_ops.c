@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filename_ops.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpaju <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 13:45:02 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 13:51:30 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 18:44:05 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ char	*get_filename(char *path, char *name)
 	char	*retstr;
 
 	str = ft_strjoin("/", name);
-	retstr = ft_strjoin(path, str);
+	if (!ft_strcmp(path, "/"))
+		retstr = ft_strdup(str);
+	else
+		retstr = ft_strjoin(path, str);
 	free(str);
 	return (retstr);
 }

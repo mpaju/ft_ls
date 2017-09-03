@@ -6,7 +6,7 @@
 /*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 13:58:16 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 16:55:22 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 17:46:40 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct		s_flag {
 	char			flag_r;
 	char			flag_ur;
 	char			flag_t;
+	char			flag_us;
+	char			flag_ut;
 	char			single_dir;
 	char			first_line;
 	int				userlen;
@@ -86,7 +88,7 @@ void				print_linkcount(t_dir *item);
 void				print_username(t_flag *flags, t_dir *item);
 void				print_groupname(t_flag *flags, t_dir *item);
 void				print_filesize(t_dir *item);
-void				print_modtime(t_dir *item);
+void				print_modtime(t_flag *flags, t_dir *item);
 void				print_filename(t_dir *item);
 void				print_link_data(t_dir *item);
 void				print_long_format(t_flag *flags, t_dir *item);
@@ -107,6 +109,7 @@ void				process_flags(const char *av, t_flag *flags);
 void				reverse_tdir_list(t_dir **arglist);
 void				read_dir_and_print(t_flag *flags, t_dir **arg);
 void				sort_by_name(t_dir **item, t_dir **list);
+void				sort_by_size(t_dir **item, t_dir **list);
 void				sort_by_time(t_dir **diritem, t_dir **arglist);
 void				sort_filelist_into_arglist(t_flag *flags, \
 		t_file **filelist, \

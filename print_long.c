@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_long.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpaju <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 15:14:46 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 15:14:48 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 17:45:59 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	print_long_format(t_flag *flags, t_dir *item)
 	ft_putchar(' ');
 	print_filesize(item);
 	ft_putchar(' ');
-	print_modtime(item);
+	print_modtime(flags, item);
 	ft_putchar(' ');
 	print_filename(item);
 	if (S_ISLNK(item->stat.st_mode))
