@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpaju <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/03 14:46:22 by mpaju             #+#    #+#             */
+/*   Updated: 2017/09/03 14:46:24 by mpaju            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
 void	reverse_tdir_list(t_dir **arglist)
@@ -9,7 +21,7 @@ void	reverse_tdir_list(t_dir **arglist)
 	current = *arglist;
 	next = current->next;
 	current->next = NULL;
-	while(next)
+	while (next)
 	{
 		if (next->next == NULL)
 		{

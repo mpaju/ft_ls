@@ -6,7 +6,7 @@
 #    By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/20 20:38:05 by valdisemacpro     #+#    #+#              #
-#    Updated: 2017/09/03 13:26:48 by mpaju            ###   ########.fr        #
+#    Updated: 2017/09/03 15:05:22 by mpaju            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 CC = gcc
@@ -25,7 +25,10 @@ SRC_FILES = main.c \
 			tfile_ops.c \
 			tdir_ops.c \
 			tmp_print.c \
-			print.c
+			free.c \
+			print_long.c \
+			print_long2.c \
+			print_ftype_and_rights.c
 SRCDIR = sources/
 SRCS = $(SRC_FILES)
 

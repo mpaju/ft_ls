@@ -1,17 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   first_args_printing.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/03 13:57:46 by mpaju             #+#    #+#             */
+/*   Updated: 2017/09/03 15:35:15 by mpaju            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
 void	find_first_valid(t_file **filelist)
 {
 	struct stat	dirstat;
-	t_file	*current;
-	t_file	*tmp;
+	t_file		*current;
+	t_file		*tmp;
 
 	current = *filelist;
+	if (!current)
+		return ;
 	while ((lstat(current->name, &dirstat)) == -1)
 	{
 		ft_putstr("ls: ");
 		perror(current->name);
-		// printf("not valid: %s\n", current->name);
 		*filelist = current->next;
 		tmp = current;
 		current = current->next;
@@ -62,9 +75,9 @@ void	print_and_remove_normal_files(t_flag *flags, t_dir **arglist)
 void	print_invalid_files(t_flag *flags, t_file **filelist)
 {
 	struct stat	dirstat;
-	t_file	*current;
-	t_file	*nextitem;
-	t_file	*tmp;
+	t_file		*current;
+	t_file		*nextitem;
+	t_file		*tmp;
 
 	find_first_valid(filelist);
 	if (!(*filelist))

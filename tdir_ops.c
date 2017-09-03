@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tdir_ops.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mpaju <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/03 14:45:44 by mpaju             #+#    #+#             */
+/*   Updated: 2017/09/03 14:47:15 by mpaju            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ls.h"
 
 t_dir	*tdirnew(t_flag *flags, char *name)
@@ -9,11 +21,7 @@ t_dir	*tdirnew(t_flag *flags, char *name)
 	if (!(ret = (t_dir *)ft_memalloc(sizeof(*ret))))
 		return (NULL);
 	if (name)
-	{
-		// if (!(ret->name = (char *)ft_memalloc(*name)))
-		// 	return (NULL);
 		ret->name = name;
-	}
 	else
 		ret->name = NULL;
 	if ((lstat(name, &ret->stat)) != -1)

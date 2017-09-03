@@ -6,7 +6,7 @@
 /*   By: mpaju <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/24 14:11:11 by mpaju             #+#    #+#             */
-/*   Updated: 2017/07/24 14:25:30 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 14:29:46 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int	ft_lstaddlast(t_list **alst, t_list *newlist)
 {
 	if (!alst && !newlist)
-		return(0);
+		return (0);
 	while ((*alst)->next != NULL)
 		*alst = (*alst)->next;
 	newlist->next = NULL;
 	(*alst)->next = newlist;
-	return(1);
+	return (1);
 }

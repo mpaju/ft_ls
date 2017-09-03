@@ -1,35 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpaju <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/03 14:39:39 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 14:39:41 by mpaju            ###   ########.fr       */
+/*   Created: 2017/09/03 14:28:21 by mpaju             #+#    #+#             */
+/*   Updated: 2017/09/03 14:28:22 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_ls.h"
 
-t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_dir	*free_tdir_and_return_next(t_dir *item)
 {
-	t_list	*tmp;
-	t_list	*tmp_list;
+	t_dir	*next;
 
-	if (!lst || !f)
-		return (NULL);
-	if (!(tmp = f(lst)))
-		return (NULL);
-	tmp_list = tmp;
-	while (1)
+	if (item)
 	{
-		if (!(tmp->next = f(lst->next)))
-			return (NULL);
-		tmp = tmp->next;
-		lst = lst->next;
-		if (lst->next == NULL)
-			return (tmp_list);
+		next = item->next;
+		if (item->name)
+		{
+			free(item->name);
+			item->name = NULL;
+		}
+		if (item->path)
+		{
+			free(item->path);
+			item->path = NULL;
+		}
+		if (item->bname)
+		{
+			free(item->bname);
+			item->bname = NULL;
+		}
+		free(item);
 	}
-	return (NULL);
+	return (next);
 }
