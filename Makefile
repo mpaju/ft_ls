@@ -6,11 +6,11 @@
 #    By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/20 20:38:05 by valdisemacpro     #+#    #+#              #
-#    Updated: 2017/09/03 15:05:22 by mpaju            ###   ########.fr        #
+#    Updated: 2017/09/03 17:02:14 by mpaju            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 CC = gcc
-
+FLAGS = -Wall -Werror -Wextra
 
 SRC_FILES = main.c \
 			process_args.c \
@@ -24,7 +24,7 @@ SRC_FILES = main.c \
 			sort_help.c \
 			tfile_ops.c \
 			tdir_ops.c \
-			tmp_print.c \
+			print.c \
 			free.c \
 			print_long.c \
 			print_long2.c \
@@ -47,11 +47,11 @@ all: $(NAME)
 
 $(NAME):
 	@make -C $(LIBDIR)
-	@$(CC) $(SRCS) -o $(NAME) $(LIB_FLAGS)
+	@$(CC) $(SRCS) -o $(NAME) $(FLAGS) $(LIB_FLAGS)
 
 deb:
 	@make deb -C $(LIBDIR)
-	@$(CC)  $(SRCS) -o $(NAME) -g $(LIB_FLAGS)
+	@$(CC)  $(SRCS) -o $(NAME) $(FLAGS) -g $(LIB_FLAGS)
 
 clean:
 	@rm -rf $(OBJS)

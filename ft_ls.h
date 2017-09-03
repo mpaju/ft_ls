@@ -6,7 +6,7 @@
 /*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 13:58:16 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 15:01:32 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 16:55:22 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # include <sys/acl.h>
 # include "libft/libft.h"
 
-# define FLAG(x) (x == 'l' || x == 'a' || x == 'r' || x == 'R' || x == 't')
+# define NAME "ft_ls"
 # define BUFFSIZE 1024
 # define SIX_MONTHS_SEC 16000000
 
@@ -64,50 +64,58 @@ typedef struct		s_file {
 	struct s_file	*next;
 }					t_file;
 
-void	ft_ls(t_flag *flags, t_file **filelist);
-void	check_empty_arg(int ac, const char **av);
-void	first_sort(const char *av, t_file **filelist);
-t_dir	*free_tdir_and_return_next(t_dir *item);
-char	*get_basename(char *name);
-char	*get_filename(char *path, char *name);
-char	*get_pathname(char *name);
-int		get_args(int ac, const char **av, t_flag *flags, t_dir *dirlist);
-void	get_dir_data(t_flag *flags, t_dir **arglist);
-int		has_lower_alpha_value(char *str1, char *str2);
-void	insert_last_pos(t_dir **diritem, t_dir **arglist);
-int		is_modified_later(int val1, int val2);
+void				ft_ls(t_flag *flags, t_file **filelist);
+void				check_empty_arg(int ac, const char **av);
+void				first_sort(const char *av, t_file **filelist);
+t_dir				*free_tdir_and_return_next(t_dir *item);
+char				*get_basename(char *name);
+char				*get_filename(char *path, char *name);
+char				*get_pathname(char *name);
+int					get_args(int ac, const char **av, t_flag *flags, \
+		t_dir *dirlist);
+void				get_dir_data(t_flag *flags, t_dir **arglist);
+int					has_lower_alpha_value(char *str1, char *str2);
+void				insert_last_pos(t_dir **diritem, t_dir **arglist);
+int					is_modified_later(int val1, int val2);
 
-void	print_type(mode_t mode);
-void	print_total_blocks(t_dir *item);
-void	print_rights(mode_t mode);
-void	print_ftype_and_rights(t_dir *item);
-void	print_linkcount(t_dir *item);
-void	print_username(t_flag *flags, t_dir *item);
-void	print_groupname(t_flag *flags, t_dir *item);
-void	print_filesize(t_dir *item);
-void	print_modtime(t_dir *item);
-void	print_filename(t_dir *item);
-void	print_link_data(t_dir *item);
-void	print_long_format(t_flag *flags, t_dir *item);
+void				print_type(mode_t mode);
+void				print_total_blocks(t_dir *item);
+void				print_rights(mode_t mode);
+void				print_ftype_and_rights(t_dir *item);
+void				print_linkcount(t_dir *item);
+void				print_username(t_flag *flags, t_dir *item);
+void				print_groupname(t_flag *flags, t_dir *item);
+void				print_filesize(t_dir *item);
+void				print_modtime(t_dir *item);
+void				print_filename(t_dir *item);
+void				print_link_data(t_dir *item);
+void				print_long_format(t_flag *flags, t_dir *item);
 
-void	print_and_remove_normal_files(t_flag *flags, t_dir **arglist);
-void	print_arglist(t_flag *flags, t_dir **arglist);
-void	print_invalid_files(t_flag *flags, t_file **filelist);
-void	print_long_format(t_flag *flags, t_dir *item);
-void	print_single_dir(t_flag *flags, t_dir **arglist);
-void	print_tdir_items(t_flag *flags, t_dir **arglist);
-void	print_type(mode_t mode);
-void	process_args(int ac, const char **av, t_flag *flags, t_file **filelist);
-void	process_flags(const char *av, t_flag *flags);
-void	reverse_tdir_list(t_dir **arglist);
-void	sort_by_name(t_dir **item, t_dir **list);
-void	sort_by_time(t_dir **diritem, t_dir **arglist);
-void	sort_filelist_into_arglist(t_flag *flags, t_file **filelist, \
+void				print_error(char *projname, char *name);
+void				print_error_nr(char *projname, int error_nr);
+void				print_and_remove_normal_files(t_flag *flags, \
+		t_dir **arglist);
+void				print_multi(t_flag *flags, t_dir **arglist);
+void				print_invalid_files(t_file **filelist);
+void				print_long_format(t_flag *flags, t_dir *item);
+void				print_single(t_flag *flags, t_dir **arglist);
+void				print_tdir_items(t_flag *flags, t_dir **arglist);
+void				print_type(mode_t mode);
+void				process_args(int ac, const char **av, \
+		t_flag *flags, t_file **filelist);
+void				process_flags(const char *av, t_flag *flags);
+void				reverse_tdir_list(t_dir **arglist);
+void				read_dir_and_print(t_flag *flags, t_dir **arg);
+void				sort_by_name(t_dir **item, t_dir **list);
+void				sort_by_time(t_dir **diritem, t_dir **arglist);
+void				sort_filelist_into_arglist(t_flag *flags, \
+		t_file **filelist, \
 	t_dir **arglist);
-void	tfile_add_first(t_file *newitem, t_file **filelist);
-void	tfile_add_after(t_file *newitem, t_file *filelist);
-void	tfile_add_last(t_file *newitem, t_file *filelist);
-t_dir	*tdirnew(t_flag *flags, char *name);
-t_file	*tfilenew(char *name);
-void	wrong_flag(const char *av);
+void				sort_stuff(t_flag *flags, t_dir **item, t_dir **list);
+void				tfile_add_first(t_file *newitem, t_file **filelist);
+void				tfile_add_after(t_file *newitem, t_file *filelist);
+void				tfile_add_last(t_file *newitem, t_file *filelist);
+t_dir				*tdirnew(t_flag *flags, char *name);
+t_file				*tfilenew(char *name);
+void				wrong_flag(const char *av);
 #endif

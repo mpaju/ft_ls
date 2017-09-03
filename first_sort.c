@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   first_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpaju <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 13:45:55 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 13:51:41 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 16:40:55 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void		first_sort(const char *av, t_file **filelist)
 {
 	t_file	*arg;
 	t_file	*current;
-	t_file	*newitem;
 
 	current = *filelist;
 	arg = tfilenew((char *)av);

@@ -6,7 +6,7 @@
 /*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 14:43:42 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 15:21:25 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 16:41:48 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, const char **av)
 	process_args(ac, av, &flags, &filelist);
 	if (!filelist && flags.first_line)
 		filelist = tfilenew(".");
-	print_invalid_files(&flags, &filelist);
+	print_invalid_files(&filelist);
 	ft_ls(&flags, &filelist);
 	return (0);
 }

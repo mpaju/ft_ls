@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpaju <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 14:28:21 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 14:28:22 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 16:44:21 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 t_dir	*free_tdir_and_return_next(t_dir *item)
 {
-	t_dir	*next;
+	t_dir	*nextitem;
 
+	nextitem = NULL;
 	if (item)
 	{
-		next = item->next;
+		nextitem = item->next;
 		if (item->name)
 		{
 			free(item->name);
@@ -36,5 +37,5 @@ t_dir	*free_tdir_and_return_next(t_dir *item)
 		}
 		free(item);
 	}
-	return (next);
+	return (nextitem);
 }

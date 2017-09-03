@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpaju <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 14:46:22 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 14:46:24 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 16:24:04 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,46 +36,17 @@ void	reverse_tdir_list(t_dir **arglist)
 	}
 }
 
-void	sort_by_name(t_dir **item, t_dir **list)
+void	sort_stuff(t_flag *flags, t_dir **item, t_dir **list)
 {
-	t_dir	*current;
-	t_dir	**link;
-
-	current = *list;
-	link = list;
-	while (current)
+	if (!(*list))
 	{
-		if ((has_lower_alpha_value((*item)->bname, current->bname)))
-		{
-			*link = *item;
-			(*item)->next = current;
-			return ;
-		}
-		current = current->next;
-		link = &(*link)->next;
+		*list = *item;
+		return ;
 	}
-	*link = *item;
-}
-
-void	sort_by_time(t_dir **diritem, t_dir **arglist)
-{
-	t_dir	**link;
-	t_dir	*current;
-
-	link = arglist;
-	current = *arglist;
-	while (current)
-	{
-		if (is_modified_later((*diritem)->time, current->time))
-		{
-			*link = *diritem;
-			(*diritem)->next = current;
-			return ;
-		}
-		current = current->next;
-		link = &(*link)->next;
-	}
-	*link = *diritem;
+	if (flags->flag_t)
+		sort_by_time(item, list);
+	else
+		sort_by_name(item, list);
 }
 
 void	insert_into_arglist(t_flag *flags, t_dir **diritem, t_dir **arglist)
@@ -91,7 +62,8 @@ void	insert_into_arglist(t_flag *flags, t_dir **diritem, t_dir **arglist)
 		insert_last_pos(diritem, arglist);
 }
 
-void	sort_filelist_into_arglist(t_flag *flags, t_file **filelist, t_dir **arglist)
+void	sort_filelist_into_arglist(t_flag *flags, t_file **filelist, \
+	t_dir **arglist)
 {
 	t_file	*current;
 	t_dir	*diritem;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_long2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpaju <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 15:06:23 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 15:15:06 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 16:40:09 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	print_filename(t_dir *item)
 
 void	print_link_data(t_dir *item)
 {
-	struct stat	lnk;
 	char		*str;
 
 	ft_putstr(" -> ");

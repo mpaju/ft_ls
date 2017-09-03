@@ -6,7 +6,7 @@
 /*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 13:42:03 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 13:43:46 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 16:57:48 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,18 @@ void	check_empty_arg(int ac, const char **av)
 		ac--;
 		av++;
 	}
+}
+
+void	print_error(char *projname, char *name)
+{
+	ft_putstr(projname);
+	ft_putstr(": ");
+	perror(name);
+}
+
+void	print_error_nr(char *projname, int error_nr)
+{
+	ft_putstr(projname);
+	ft_putstr(": ");
+	ft_putstr(strerror(error_nr));
 }

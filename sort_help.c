@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_help.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpaju <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 14:43:28 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 14:43:34 by mpaju            ###   ########.fr       */
+/*   Updated: 2017/09/03 16:31:54 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,46 @@ int		has_lower_alpha_value(char *str1, char *str2)
 	if ((ft_strcmp(str1, str2)) < 0)
 		return (1);
 	return (0);
+}
+
+void	sort_by_name(t_dir **item, t_dir **list)
+{
+	t_dir	*current;
+	t_dir	**link;
+
+	current = *list;
+	link = list;
+	while (current)
+	{
+		if ((has_lower_alpha_value((*item)->bname, current->bname)))
+		{
+			*link = *item;
+			(*item)->next = current;
+			return ;
+		}
+		current = current->next;
+		link = &(*link)->next;
+	}
+	*link = *item;
+}
+
+void	sort_by_time(t_dir **diritem, t_dir **arglist)
+{
+	t_dir	**link;
+	t_dir	*current;
+
+	link = arglist;
+	current = *arglist;
+	while (current)
+	{
+		if (is_modified_later((*diritem)->time, current->time))
+		{
+			*link = *diritem;
+			(*diritem)->next = current;
+			return ;
+		}
+		current = current->next;
+		link = &(*link)->next;
+	}
+	*link = *diritem;
 }

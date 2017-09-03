@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tmp_print.c                                        :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mpaju <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/03 15:15:41 by mpaju             #+#    #+#             */
-/*   Updated: 2017/09/03 15:50:43 by mpaju            ###   ########.fr       */
+/*   Created: 2017/09/03 17:02:52 by mpaju             #+#    #+#             */
+/*   Updated: 2017/09/03 17:02:53 by mpaju            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ static void	print_subs(t_flag *flags, t_dir **arglist)
 	while (current)
 	{
 		if (current->error_nr)
-			printf("ls: %s\n", strerror(current->error_nr));
+			print_error_nr(NAME, current->error_nr);
 		else if (flags->flag_l)
 			print_long_format(flags, current);
 		else
-			printf("%s\n", current->bname);
+			ft_putendl(current->bname);
 		current = current->next;
 	}
 }
 
-void	print_arglist(t_flag *flags, t_dir **arglist)
+void		print_multi(t_flag *flags, t_dir **arglist)
 {
 	t_dir	*current;
 
@@ -54,7 +54,7 @@ void	print_arglist(t_flag *flags, t_dir **arglist)
 	}
 }
 
-void	print_single_dir(t_flag *flags, t_dir **arglist)
+void		print_single(t_flag *flags, t_dir **arglist)
 {
 	print_subs(flags, &(*arglist)->subfiles);
 	flags->first_line = 0;
