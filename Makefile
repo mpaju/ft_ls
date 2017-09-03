@@ -6,7 +6,7 @@
 #    By: mpaju <mpaju@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/20 20:38:05 by valdisemacpro     #+#    #+#              #
-#    Updated: 2017/09/03 13:25:21 by mpaju            ###   ########.fr        #
+#    Updated: 2017/09/03 13:26:48 by mpaju            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 CC = gcc
@@ -51,7 +51,7 @@ deb:
 	@$(CC)  $(SRCS) -o $(NAME) -g $(LIB_FLAGS)
 
 clean:
-	
+	@rm -rf $(OBJS)
 	@make clean -C $(LIBDIR)
 
 fclean:
