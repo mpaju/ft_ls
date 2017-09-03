@@ -1,7 +1,0 @@
-#include "libft.h"
-
-void	ft_lstadd(t_list **alst, t_list *newlst)
-{
-	newlst->next = *alst;
-	*alst = newlst;
-}
