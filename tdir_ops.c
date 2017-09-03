@@ -12,7 +12,7 @@ t_dir	*tdirnew(t_flag *flags, char *name)
 	{
 		// if (!(ret->name = (char *)ft_memalloc(*name)))
 		// 	return (NULL);
-		ret->name = ft_strdup(name);
+		ret->name = name;
 	}
 	else
 		ret->name = NULL;

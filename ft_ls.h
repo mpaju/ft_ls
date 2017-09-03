@@ -18,7 +18,7 @@
 # include "libft/libft.h"
 
 # define FLAG(x) (x == 'l' || x == 'a' || x == 'r' || x == 'R' || x == 't')
-# define PATHBUF 1024
+# define BUFFSIZE 1024
 # define SIX_MONTHS_SEC 16000000
 
 typedef struct		s_flag {
@@ -37,6 +37,7 @@ typedef struct		s_dir {
 	char			*name;
 	char			*bname;
 	char			*path;
+	char			*link;
 	int 			error_nr;	
 	time_t			time;
 	struct stat		stat;
@@ -55,6 +56,7 @@ void	ft_ls(t_flag *flags, t_file **filelist);
 void	check_empty_arg(int ac, const char **av);
 void	first_sort(const char *av, t_file **filelist);
 char	*get_basename(char *name);
+char	*get_filename(char *path, char *name);
 char	*get_pathname(char *name);
 int		get_args(int ac, const char **av, t_flag *flags, t_dir *dirlist);
 void	get_dir_data(t_flag *flags, t_dir **arglist);

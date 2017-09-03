@@ -26,18 +26,6 @@ void	give_tdir(flags, arglist)
 }
 */
 
-char	*get_pathname(char *name)
-{
-	int	size;
-
-	size = ft_strlen(name);
-	size--;
-	while ((name[size]) != '/' && size != -1)
-		size--;
-	if (size == -1)
-		return (ft_strjoin(name, "/"));
-	return (ft_strncpy(ft_strnew(size + 2), name, size + 1));
-}
 
 void	sort_stuff(t_flag *flags, t_dir **item, t_dir **list)
 {
@@ -90,6 +78,11 @@ t_dir	*free_tdir_and_return_next(t_dir *item)
 			free(item->path);
 			item->path = NULL;
 		}
+		if (item->bname)
+		{
+			free(item->bname);
+			item->bname = NULL;
+		}
 		free(item);
 	}
 	return (next);
@@ -131,7 +124,7 @@ void	smth(t_flag *flags, t_dir **arg)
 			// vbla polnud koige parem mote tdirnew-d muuta
 			if ((!flags->flag_a && ft_strncmp(open_dir->d_name, ".", 1)) || flags->flag_a)
 			{
-				item = tdirnew(flags, ft_strjoin((*arg)->name, ft_strjoin("/", open_dir->d_name)));
+				item = tdirnew(flags, get_filename((*arg)->name, open_dir->d_name));
 				sort_stuff(flags, &item, &(*arg)->subfiles);
 			}
 			// kui filelist eksisteerib, siis hakka sinna sisse sortima uusi itemeid

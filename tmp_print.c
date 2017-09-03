@@ -99,14 +99,17 @@ void	print_ftype_and_rights(t_dir *item)
 	mode = item->stat.st_mode;
 	print_type(mode);
 	print_rights(mode);
-	ft_putchar(' ');
-
 }
 
 void	print_linkcount(t_dir *item)
 {
-	ft_putstr(ft_itoa(item->stat.st_nlink));
-	ft_putchar(' ');
+	int		strlen;
+	char	*str;
+
+	str = ft_itoa(item->stat.st_nlink);
+	strlen = ft_strlen(str);
+	ft_print_chars(' ', 4 - strlen);
+	ft_putstr(str);
 }
 
 void	print_username(t_flag *flags, t_dir *item)
@@ -118,7 +121,6 @@ void	print_username(t_flag *flags, t_dir *item)
 	strlen = ft_strlen(pwinfo->pw_name);
 	ft_putstr(pwinfo->pw_name);
 	ft_print_chars(' ', flags->userlen - strlen);
-	ft_putchar(' ');
 }
 
 
@@ -132,31 +134,31 @@ void	print_groupname(t_flag *flags, t_dir *item)
 	strlen = ft_strlen(grpinfo->gr_name);
 	ft_putstr(grpinfo->gr_name);
 	ft_print_chars(' ', flags->grouplen - strlen);
-	ft_putchar(' ');
 }
 
 void	print_filesize(t_dir *item)
 {
 	int		strlen;
-	char	*value;
+	char	*str;
 
 	if (S_ISBLK(item->stat.st_mode) || S_ISCHR(item->stat.st_mode))
 	{
-		value = ft_itoa((int)major(item->stat.st_rdev));
-		strlen = ft_strlen(value);
+		str = ft_itoa((int)major(item->stat.st_rdev));
+		strlen = ft_strlen(str);
 		ft_print_chars(' ', 5 - strlen);
-		ft_putstr(value);
+		ft_putstr(str);
 		ft_putchar(',');
-		value = ft_itoa((int)minor(item->stat.st_rdev));
-		strlen = ft_strlen(value);
+		str = ft_itoa((int)minor(item->stat.st_rdev));
+		strlen = ft_strlen(str);
 		ft_print_chars(' ', 5 - strlen);
-		ft_putstr(value);
-		ft_putchar(' ');
+		ft_putstr(str);
 	}
 	else
 	{
-		ft_putstr("filesize");
-		ft_putchar(' ');
+		str = ft_itoa((int)item->stat.st_size);
+		strlen = ft_strlen(str);
+		ft_print_chars(' ', 7 - strlen);
+		ft_putstr(str);
 	}
 }
 
@@ -175,28 +177,46 @@ void print_modtime(t_dir *item)
 		ft_putstr(itemtime[3]);
 	else
 	{
-		ft_putstr(itemtime[4]);
 		ft_putchar(' ');
+		ft_putstr(itemtime[4]);
 	}
-	ft_putchar(' ');
 }
 
 void	print_filename(t_dir *item)
 {
 	ft_putstr(item->bname);
-	ft_putchar(' ');
 }
+
+void	print_link_data(t_dir *item)
+{
+	struct stat	lnk;
+	char		*str;
+
+	ft_putstr(" -> ");
+	str = (char *)ft_memalloc(sizeof(char) * BUFFSIZE);
+	if ((readlink(item->name, str, sizeof(char) * BUFFSIZE)) == -1)
+		return ;
+	ft_putstr(str);
+}	
 
 
 void	print_long_format(t_flag *flags, t_dir *item)
 {
 	print_ftype_and_rights(item);
+	ft_putchar(' ');
 	print_linkcount(item);
+	ft_putchar(' ');
 	print_username(flags, item);
+	ft_putchar(' ');
 	print_groupname(flags, item);
+	ft_putchar(' ');
 	print_filesize(item);
+	ft_putchar(' ');
 	print_modtime(item);
+	ft_putchar(' ');
 	print_filename(item);
+	if (S_ISLNK(item->stat.st_mode))
+		print_link_data(item);	
 	ft_putchar('\n');
 }
 
@@ -227,8 +247,9 @@ void	print_arglist(t_flag *flags, t_dir **arglist)
 	if (current->subfiles)
 	{
 		if (!flags->first_line)
-			printf("X\n");
-		printf("%s:\n", current->name);
+			ft_putchar('\n');
+		ft_putendl(current->name);
+		// printf("%s:\n", current->name);
 		flags->first_line = 0;
 		print_subs(flags, &current->subfiles);
 	// 	print_arglist(flags, &current->subfiles);
@@ -236,8 +257,9 @@ void	print_arglist(t_flag *flags, t_dir **arglist)
 	else
 	{
 		if (!flags->first_line)
-			printf("X\n");
-		printf("%s:\n", current->name);
+			ft_putchar('\n');
+		ft_putstr(current->name);
+		// printf("%s:\n", current->name);
 		flags->first_line = 0;
 	}
 	// if (current->next)

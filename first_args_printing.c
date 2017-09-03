@@ -9,7 +9,9 @@ void	find_first_valid(t_file **filelist)
 	current = *filelist;
 	while ((lstat(current->name, &dirstat)) == -1)
 	{
-		printf("not valid: %s\n", current->name);
+		ft_putstr("ls: ");
+		perror(current->name);
+		// printf("not valid: %s\n", current->name);
 		*filelist = current->next;
 		tmp = current;
 		current = current->next;
@@ -73,7 +75,8 @@ void	print_invalid_files(t_flag *flags, t_file **filelist)
 	{
 		if ((lstat(nextitem->name, &dirstat)) == -1)
 		{
-			printf("wrong file %s\n", nextitem->name);
+			ft_putstr("ls: ");
+			perror(nextitem->name);
 			tmp = nextitem;
 			current->next = nextitem->next;
 			nextitem = nextitem->next;

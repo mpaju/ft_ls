@@ -10,11 +10,34 @@ char	*get_basename(char *name)
 	{
 		if (name[size] == '/')
 		{
-			fflush(stdout);
 			ret = ft_strdup(&(name[size + 1]));
 			return (ret);
 		}
 		size--;
 	}
-	return (name);
+	return (ft_strdup(name));
+}
+
+char	*get_pathname(char *name)
+{
+	int	size;
+
+	size = ft_strlen(name);
+	size--;
+	while ((name[size]) != '/' && size != -1)
+		size--;
+	if (size == -1)
+		return (ft_strjoin(name, "/"));
+	return (ft_strncpy(ft_strnew(size + 2), name, size + 1));
+}
+
+char	*get_filename(char *path, char *name)
+{
+	char	*str;
+	char	*retstr;
+
+	str = ft_strjoin("/", name);
+	retstr = ft_strjoin(path, str);
+	free(str);
+	return (retstr);
 }
